@@ -11,6 +11,35 @@ Ctrl+F5 after edits. This folder contains all HTML, JavaScript, posters, and med
 needed for static hosting; it does not depend on the evaluation output folder at
 runtime.
 
+## GitHub Pages publishing
+
+Keep editing this folder in the GenRec checkout. The parent repository has two
+remotes: `origin` for the research project and `pages` for
+`git@github.com:CoGenRec/CoGenRec.github.io.git`. No second working copy or nested
+Git repository is needed.
+
+Commit only the intended page changes, then publish the committed contents of
+`project_page` to the website repository:
+
+```bash
+cd /data2/myp/published_projects/GenRec
+git add -- project_page
+git commit -m "Update CoGenRec project page"
+git subtree push --prefix=project_page pages main
+```
+
+`git subtree` creates a separate history containing only this directory, with
+`index.html` and `assets` at the website repository root. Uncommitted changes are
+not included. Continue to use `git push origin main` separately for the research
+repository. Do not use an ordinary `git push pages main`, which would send the
+entire research repository. The first subtree push includes the page's existing
+history, including older assets; subsequent pushes transfer only new changes.
+
+After the first push, open the website repository's **Settings → Pages** and
+select **Deploy from a branch → main → / (root)**, then save. The public URL is
+<https://cogenrec.github.io/>. The empty `.nojekyll` file disables Jekyll processing
+for this static HTML site. See [GitHub's publishing-source instructions](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
+
 The first scene is 杯子摔碎, CSV row 1, cached COP intervals 66–70. The
 gallery card uses those selected assets. The hero contains the
 paper title and links only; the former cover video has been removed. Each video frame contains

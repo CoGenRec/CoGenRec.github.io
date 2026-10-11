@@ -51,9 +51,8 @@
     .eyebrow { color: var(--blue); text-transform: uppercase; font-size: 12px; font-weight: 650; letter-spacing: 1.7px; }
     .hero { padding-top: 66px; text-align: center; }
     .hero h1 { max-width: 1050px; margin: 14px auto 0; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.25; font-weight: 600; letter-spacing: -.8px; }
-    .authors { max-width: 960px; margin: 24px auto 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 19px; font-size: 15px; color: #526274; }
-    .authors span { white-space: nowrap; }
-    .authors .first-author { color: var(--blue); font-weight: 550; }
+    .affiliations { max-width: 960px; margin: 24px auto 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 24px; font-size: 17px; color: #526274; }
+    .affiliations span { white-space: nowrap; }
     .hero-summary { max-width: 760px; margin: 24px auto 0; color: var(--muted); font-size: 18px; line-height: 1.7; }
     .actions { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px; margin-top: 28px; }
     .button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 46px; padding: 10px 20px; border-radius: 9px; border: 1px solid var(--line); background: var(--surface); font-size: 15px; font-weight: 550; transition: background .15s, border-color .15s; }
@@ -171,7 +170,7 @@
       .nav-extra { display: none; }
       .hero { padding-top: 43px; }
       .hero .eyebrow { font-size: 11px; letter-spacing: 1.2px; }
-      .authors { margin-top: 22px; gap: 6px 15px; font-size: 14px; }
+      .affiliations { margin-top: 22px; gap: 6px 18px; font-size: 15px; }
       .hero-summary { font-size: 17px; max-width: 530px; }
       .section { padding-top: 65px; }
       .overview-layout { grid-template-columns: 1fr; gap: 30px; }
@@ -246,8 +245,8 @@
     <section class="container hero" aria-labelledby="project-title">
       <p class="eyebrow">Complementary vision · Generative reconstruction</p>
       <h1 id="project-title">CoGenRec: A Unified Generative Framework for Complementary Vision Reconstruction</h1>
-      <div class="authors" aria-label="Authors">
-        <span class="first-author">Yapeng Meng</span><span>Xiangru Chen</span><span>Yuguo Chen</span><span>Shaojun Xu</span><span>Xuezhen Wang</span><span>Lijian Wang</span><span>Zheyu Yang</span><span>Yihan Lin</span><span>Luping Shi</span><span>Rong Zhao</span>
+      <div class="affiliations" aria-label="Affiliations">
+        <span>Tsinghua University</span><span>Primevision</span>
       </div>
       <p class="hero-summary">Reconstructing sharp, high-frame-rate HDR video<br>from complementary RGB and spatio-temporal measurements.</p>
       <div class="actions">
