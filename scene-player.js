@@ -10,7 +10,7 @@
     const source = sources.find(item => video.canPlayType(item.type)) || sources[0];
     // Python's basic HTTP server does not implement byte ranges. A shared blob
     // makes this short clip fully seekable even on that preview server, while
-    // loading the file only once for the gallery and enlarged view.
+    // loading each media URL only once across playback controls.
     const url = mode === 'master' ? source.src : source.src.replace('/comparison.', `/comparison-${mode}.`);
     if (!mediaUrls.has(url)) {
       const result = location.protocol === 'file:' ? Promise.resolve(url) :
@@ -21,12 +21,6 @@
       mediaUrls.set(url, result);
     }
     return mediaUrls.get(url);
-  }
-
-  function pauseAll(except) {
-    players.forEach(player => {
-      if (player !== except) player.pause();
-    });
   }
 
   function createSceneViews(root, video) {
@@ -109,8 +103,7 @@
         Array.from({ length: count }, (_, i) => sampleAtTick(Math.min(durationTicks - 1, Math.round(i * sourceFps / (encodedFps * factor)))));
       return [factor === 1 ? 'original' : `slow${factor}`, map];
     }));
-    const player = { video, speed, setSpeed, seekFrame, play, pause, suspend, resume, get frame() { return currentFrame; } };
-    players.set(root, player);
+    players.set(root, { suspend, resume });
 
     function showStatus(message = '') {
       status.textContent = message;
@@ -347,37 +340,14 @@
     renderPlaybackState();
     loadMedia(video).then(url => { if (operation === 0) video.src = url; });
     if (root.dataset.autoplay !== 'false' && root.getClientRects().length) play();
-    return player;
   }
 
   document.querySelectorAll('.sync-player').forEach(createPlayer);
   window.CoGenRecPlayers = {
-    pauseAll,
-    play(root) { return players.get(root).play(); },
-    pause(root) { players.get(root).pause(); },
     setVisible(root, visible) {
       const player = players.get(root);
       if (visible) player.resume('panel');
       else player.suspend('panel');
-    },
-    clone(source) {
-      const root = source.cloneNode(false);
-      root.removeAttribute('id');
-      root.dataset.autoplay = 'false';
-      root.removeAttribute('data-media-mode');
-      const video = source.querySelector('video').cloneNode(true);
-      video.removeAttribute('src');
-      video.autoplay = false;
-      root.append(video);
-      createPlayer(root);
-      return root;
-    },
-    copyState(source, target) {
-      const from = players.get(source);
-      const to = players.get(target);
-      to.pause();
-      to.setSpeed(from.speed.value);
-      to.seekFrame(from.frame);
     },
   };
   document.addEventListener('visibilitychange', () => {

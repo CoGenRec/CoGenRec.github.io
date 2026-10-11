@@ -749,104 +749,32 @@
       "frame_count": 12
     }
   },
-  "endpoint_policy": "F0 at AOP 0 of each selected COP; STGDNet frames[0] is used only here",
+  "endpoint_policy": "F0 at AOP 0 of the first selected COP; STGDNet frames[0] is used only here",
   "endpoint_images": [
     {
       "cop": 752,
       "aop": 0,
       "images": {
         "input": {
-          "image": "endpoint-cop752-input.png",
-          "crop": "endpoint-cop752-input-crop.png"
+          "image": "endpoint-cop752-input.png"
         },
         "unet": {
-          "image": "endpoint-cop752-unet.png",
-          "crop": "endpoint-cop752-unet-crop.png"
+          "image": "endpoint-cop752-unet.png"
         },
         "igfnet": {
-          "image": "endpoint-cop752-igfnet.png",
-          "crop": "endpoint-cop752-igfnet-crop.png"
+          "image": "endpoint-cop752-igfnet.png"
         },
         "cbrdm": {
-          "image": "endpoint-cop752-cbrdm.png",
-          "crop": "endpoint-cop752-cbrdm-crop.png"
+          "image": "endpoint-cop752-cbrdm.png"
         },
         "stgdnet": {
-          "image": "endpoint-cop752-stgdnet.png",
-          "crop": "endpoint-cop752-stgdnet-crop.png"
+          "image": "endpoint-cop752-stgdnet.png"
         },
         "ours": {
-          "image": "endpoint-cop752-ours.png",
-          "crop": "endpoint-cop752-ours-crop.png"
-        }
-      }
-    },
-    {
-      "cop": 753,
-      "aop": 0,
-      "images": {
-        "input": {
-          "image": "endpoint-cop753-input.png",
-          "crop": "endpoint-cop753-input-crop.png"
-        },
-        "unet": {
-          "image": "endpoint-cop753-unet.png",
-          "crop": "endpoint-cop753-unet-crop.png"
-        },
-        "igfnet": {
-          "image": "endpoint-cop753-igfnet.png",
-          "crop": "endpoint-cop753-igfnet-crop.png"
-        },
-        "cbrdm": {
-          "image": "endpoint-cop753-cbrdm.png",
-          "crop": "endpoint-cop753-cbrdm-crop.png"
-        },
-        "stgdnet": {
-          "image": "endpoint-cop753-stgdnet.png",
-          "crop": "endpoint-cop753-stgdnet-crop.png"
-        },
-        "ours": {
-          "image": "endpoint-cop753-ours.png",
-          "crop": "endpoint-cop753-ours-crop.png"
-        }
-      }
-    },
-    {
-      "cop": 754,
-      "aop": 0,
-      "images": {
-        "input": {
-          "image": "endpoint-cop754-input.png",
-          "crop": "endpoint-cop754-input-crop.png"
-        },
-        "unet": {
-          "image": "endpoint-cop754-unet.png",
-          "crop": "endpoint-cop754-unet-crop.png"
-        },
-        "igfnet": {
-          "image": "endpoint-cop754-igfnet.png",
-          "crop": "endpoint-cop754-igfnet-crop.png"
-        },
-        "cbrdm": {
-          "image": "endpoint-cop754-cbrdm.png",
-          "crop": "endpoint-cop754-cbrdm-crop.png"
-        },
-        "stgdnet": {
-          "image": "endpoint-cop754-stgdnet.png",
-          "crop": "endpoint-cop754-stgdnet-crop.png"
-        },
-        "ours": {
-          "image": "endpoint-cop754-ours.png",
-          "crop": "endpoint-cop754-ours-crop.png"
+          "image": "endpoint-cop752-ours.png"
         }
       }
     }
-  ],
-  "detail_roi_xywh": [
-    0,
-    40,
-    400,
-    280
   ],
   "sources": [
     {

@@ -15,15 +15,20 @@ import numpy as np
 from PIL import Image
 
 from export_selected_scenes import PAGE, sha256
-from export_rotation_scenes import RUN, SCENES as ROTATION_SCENES, AOPS, RATIO, SOURCE_FPS
+from cache_sources import RUN, AOPS, RATIO, SOURCE_FPS
 from rgb_alignment import rgb_reference
 
 SCENES = {
-    key: {**spec, 'last_cop': spec['first_cop']+1,
-          'tags': ['Fast motion', 'Blur']}
-    for key, spec in ROTATION_SCENES.items()
-}
-SCENES.update({
+    'turntable': {
+        'source_scene': '大HW转盘', 'title': 'Spinning disc',
+        'worker': 2, 'row': 89, 'first_cop': 2, 'last_cop': 3,
+        'slug': 'hw-turntable-cop2-3', 'tags': ['Fast motion', 'Blur'],
+    },
+    'blocks': {
+        'source_scene': '旋转积木', 'title': 'Rotating blocks',
+        'worker': 1, 'row': 56, 'first_cop': 40, 'last_cop': 41,
+        'slug': 'rotating-blocks-cop40-41', 'tags': ['Fast motion', 'Blur'],
+    },
     'hdr-cartoon': {
         'source_scene': 'HDR卡通人', 'title': 'Cartoon poster',
         'worker': 3, 'row': 3, 'first_cop': 185, 'last_cop': 185,
@@ -39,8 +44,7 @@ SCENES.update({
         'worker': 3, 'row': 60, 'first_cop': 752, 'last_cop': 754,
         'slug': 'motorcycle-cop752-754', 'tags': ['Fast motion', 'Blur'],
     },
-})
-SCENES['turntable']['title'] = 'Spinning disc'
+}
 
 METHODS = [
     ('input', 'Input RGB', None, 'Observation'),
@@ -53,11 +57,6 @@ STGD = ('stgdnet', 'STGDNet', '011_STGDNet_CVPR_2026_official_weights', 'Officia
 ENDPOINT_METHODS = [*METHODS[:-1], STGD, METHODS[-1]]
 ENCODED_FPS = 60
 TILE_WIDTH, TILE_HEIGHT = 640, 320
-ROIS = {
-    'turntable': [225, 50, 210, 210], 'blocks': [210, 40, 190, 240],
-    'hdr-cartoon': [180, 10, 340, 225], 'hdr-bank': [150, 0, 280, 210],
-    'motorcycle': [0, 40, 400, 280],
-}
 
 
 def encoding_command(out, suffix=''):
@@ -132,18 +131,13 @@ def export(scene):
     duration_ticks = len(endpoints)*RATIO
     for (key, *_), array in zip(METHODS, samples[0][1]):
         Image.fromarray(array).save(out/f'poster-{key}.jpg', quality=95, subsampling=0)
-    Image.fromarray(np.concatenate(samples[0][1], axis=1)).save(out/'poster.jpg', quality=95, subsampling=0)
-    roi = ROIS[scene]
-    x, y, width, height = roi
     endpoint_map = []
-    for endpoint in endpoints:
+    for endpoint in endpoints[:1]:
         item = {'cop': endpoint['cop'], 'aop': 0, 'images': {}}
         for key, array in endpoint['images'].items():
             name = f"endpoint-cop{endpoint['cop']}-{key}.png"
-            crop_name = f"endpoint-cop{endpoint['cop']}-{key}-crop.png"
             Image.fromarray(array).save(out/name)
-            Image.fromarray(array[y:y+height, x:x+width]).save(out/crop_name)
-            item['images'][key] = {'image': name, 'crop': crop_name}
+            item['images'][key] = {'image': name}
         endpoint_map.append(item)
     display_samples = []
     for index, (info, _) in enumerate(samples):
@@ -194,8 +188,8 @@ def export(scene):
         'rgb_switch_aop': RATIO//2+1,
         'encoded_frames': [{'frame': tick, 'source_sample': index} for tick, index in enumerate(display_samples)],
         'fast_previews': {str(f): {'encoded_ticks': p['ticks'], 'source_samples': [display_samples[t] for t in p['ticks']], 'frame_count': len(p['ticks'])} for f, p in previews.items()},
-        'endpoint_policy': 'F0 at AOP 0 of each selected COP; STGDNet frames[0] is used only here',
-        'endpoint_images': endpoint_map, 'detail_roi_xywh': roi,
+        'endpoint_policy': 'F0 at AOP 0 of the first selected COP; STGDNet frames[0] is used only here',
+        'endpoint_images': endpoint_map,
         'sources': [{'path': str(path), 'sha256': sha256(path)} for path in source_paths],
     }
     (out/'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2)+'\n')

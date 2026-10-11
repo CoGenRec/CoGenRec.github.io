@@ -567,74 +567,32 @@
       "frame_count": 8
     }
   },
-  "endpoint_policy": "F0 at AOP 0 of each selected COP; STGDNet frames[0] is used only here",
+  "endpoint_policy": "F0 at AOP 0 of the first selected COP; STGDNet frames[0] is used only here",
   "endpoint_images": [
     {
       "cop": 40,
       "aop": 0,
       "images": {
         "input": {
-          "image": "endpoint-cop40-input.png",
-          "crop": "endpoint-cop40-input-crop.png"
+          "image": "endpoint-cop40-input.png"
         },
         "unet": {
-          "image": "endpoint-cop40-unet.png",
-          "crop": "endpoint-cop40-unet-crop.png"
+          "image": "endpoint-cop40-unet.png"
         },
         "igfnet": {
-          "image": "endpoint-cop40-igfnet.png",
-          "crop": "endpoint-cop40-igfnet-crop.png"
+          "image": "endpoint-cop40-igfnet.png"
         },
         "cbrdm": {
-          "image": "endpoint-cop40-cbrdm.png",
-          "crop": "endpoint-cop40-cbrdm-crop.png"
+          "image": "endpoint-cop40-cbrdm.png"
         },
         "stgdnet": {
-          "image": "endpoint-cop40-stgdnet.png",
-          "crop": "endpoint-cop40-stgdnet-crop.png"
+          "image": "endpoint-cop40-stgdnet.png"
         },
         "ours": {
-          "image": "endpoint-cop40-ours.png",
-          "crop": "endpoint-cop40-ours-crop.png"
-        }
-      }
-    },
-    {
-      "cop": 41,
-      "aop": 0,
-      "images": {
-        "input": {
-          "image": "endpoint-cop41-input.png",
-          "crop": "endpoint-cop41-input-crop.png"
-        },
-        "unet": {
-          "image": "endpoint-cop41-unet.png",
-          "crop": "endpoint-cop41-unet-crop.png"
-        },
-        "igfnet": {
-          "image": "endpoint-cop41-igfnet.png",
-          "crop": "endpoint-cop41-igfnet-crop.png"
-        },
-        "cbrdm": {
-          "image": "endpoint-cop41-cbrdm.png",
-          "crop": "endpoint-cop41-cbrdm-crop.png"
-        },
-        "stgdnet": {
-          "image": "endpoint-cop41-stgdnet.png",
-          "crop": "endpoint-cop41-stgdnet-crop.png"
-        },
-        "ours": {
-          "image": "endpoint-cop41-ours.png",
-          "crop": "endpoint-cop41-ours-crop.png"
+          "image": "endpoint-cop40-ours.png"
         }
       }
     }
-  ],
-  "detail_roi_xywh": [
-    210,
-    40,
-    190,
-    240
   ],
   "sources": [
     {

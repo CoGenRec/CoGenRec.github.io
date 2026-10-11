@@ -21,7 +21,7 @@ import tempfile
 import numpy as np
 
 from export_selected_scenes import PAGE, REPO, export_scene, sha256
-from export_rotation_scenes import RUN, METHOD, AOPS, RATIO, SOURCE_FPS
+from cache_sources import RUN, METHOD, AOPS, RATIO, SOURCE_FPS
 from rgb_alignment import rgb_reference
 
 

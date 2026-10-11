@@ -385,44 +385,32 @@
       "frame_count": 4
     }
   },
-  "endpoint_policy": "F0 at AOP 0 of each selected COP; STGDNet frames[0] is used only here",
+  "endpoint_policy": "F0 at AOP 0 of the first selected COP; STGDNet frames[0] is used only here",
   "endpoint_images": [
     {
       "cop": 185,
       "aop": 0,
       "images": {
         "input": {
-          "image": "endpoint-cop185-input.png",
-          "crop": "endpoint-cop185-input-crop.png"
+          "image": "endpoint-cop185-input.png"
         },
         "unet": {
-          "image": "endpoint-cop185-unet.png",
-          "crop": "endpoint-cop185-unet-crop.png"
+          "image": "endpoint-cop185-unet.png"
         },
         "igfnet": {
-          "image": "endpoint-cop185-igfnet.png",
-          "crop": "endpoint-cop185-igfnet-crop.png"
+          "image": "endpoint-cop185-igfnet.png"
         },
         "cbrdm": {
-          "image": "endpoint-cop185-cbrdm.png",
-          "crop": "endpoint-cop185-cbrdm-crop.png"
+          "image": "endpoint-cop185-cbrdm.png"
         },
         "stgdnet": {
-          "image": "endpoint-cop185-stgdnet.png",
-          "crop": "endpoint-cop185-stgdnet-crop.png"
+          "image": "endpoint-cop185-stgdnet.png"
         },
         "ours": {
-          "image": "endpoint-cop185-ours.png",
-          "crop": "endpoint-cop185-ours-crop.png"
+          "image": "endpoint-cop185-ours.png"
         }
       }
     }
-  ],
-  "detail_roi_xywh": [
-    180,
-    10,
-    340,
-    225
   ],
   "sources": [
     {

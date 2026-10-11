@@ -278,12 +278,8 @@ Regenerate from the COP58 inputs and reconstruction cache:
   six full-resolution PNGs. There is no COP caption, COP picker or detail-crop
   section. The other four reconstruction
   methods use `frames[0]`, and Input RGB uses `rgb_start` at the same endpoint.
-  The exported files retain all selected endpoints and crops for reproducibility,
-  even though the page references only the first endpoint's full images.
-  Exported detail ROIs `[x,y,width,height]` are `[225,50,210,210]` for HW turntable and
-  `[210,40,190,240]` for rotating blocks, `[180,10,340,225]` for HDR cartoon,
-  `[150,0,280,210]` for HDR bank facade, and `[0,40,400,280]` for motorcycle,
-  applied identically to all methods.
+  Only the first selected COP's full-resolution images are exported. Unused
+  additional endpoints, detail crops, and combined comparison posters are omitted.
   Switching to RGB deblurring pauses only the comparison videos before hiding
   their players; switching back resumes those that were playing.
 
@@ -316,12 +312,19 @@ Regenerate all official comparisons, or pass one or more scene keys
 
 Comparison assets live in `assets/comparisons/<scene>/`. Their manifests
 distinguish retained `samples` (7 per COP) from held `encoded_frames` (25 per COP), list both method sets, and
-record every endpoint image and ROI. `data-sample-ticks` and
+record the displayed first-COP endpoint images. `data-sample-ticks` and
 `data-duration-ticks` provide the same timing to the player; `data-clock`
 selects media-time updates for the canvas source video. Existing dense scenes
-omit those attributes and retain their original behavior. The previous
-four-view rotation assets/exporter remain available for reproducibility but
-are no longer referenced by the page.
+omit those attributes and retain their original behavior. Shared cache settings
+for comparisons and the two additional gallery scenes live in
+`tools/cache_sources.py`; there is no separate four-view rotation exporter.
+
+The asset tree contains the current page's media, dynamically selected speed
+variants, and provenance manifests. Both MP4 and WebM are needed for browser
+compatibility. The framework renderer publishes the complete desktop figure
+and the four narrow-layout panels, each with a reduced-motion variant. Its
+desktop reconstruction panel is embedded directly into the complete figure,
+so an unused standalone copy is not exported.
 
 Each asset folder includes a manifest with its exact source files, hashes,
 calibrated-video frame mapping where applicable, and all retained AOP indices.

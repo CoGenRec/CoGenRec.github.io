@@ -471,9 +471,6 @@ def main():
         'endpoint-encoder': endpoint_encoder(),
         'temporal-propagator': temporal_propagator(),
     }
-    for name, svg in diagrams.items():
-        ET.fromstring(svg)
-        (OUT / f'{name}.svg').write_text(svg + '\n')
     nested = ''
     for name, (x, y, w, h) in {
         'measurements': (0, 0, MEASUREMENTS_WIDTH, 750), 'reconstruction': (820, 0, 1000, 410),
@@ -484,11 +481,15 @@ def main():
                  '<title id="framework-title">CoGenRec framework</title>'
                  '<desc id="framework-desc">Dual-pathway CVS measurements, complementarity-driven generative reconstruction, exposure-aware endpoint encoding, and bidirectional recurrent temporal propagation.</desc>'
                  + nested + '</svg>')
-    ET.fromstring(composite)
-    (OUT / 'cogenrec-framework.svg').write_text(composite + '\n')
+    # The desktop reconstruction is embedded in the composite. Only publish
+    # the complete desktop figure and the four panels used by narrow layouts.
+    published = {name: svg for name, svg in diagrams.items() if name != 'reconstruction'}
+    published['cogenrec-framework'] = composite
     # An outer HTML <picture> selects these files for reduced motion. This also
     # works in browsers that do not update media queries inside cached SVG images.
-    for name, svg in {**diagrams, 'cogenrec-framework': composite}.items():
+    for name, svg in published.items():
+        ET.fromstring(svg)
+        (OUT / f'{name}.svg').write_text(svg + '\n')
         static = svg.replace('class="framework-svg', 'class="framework-svg framework-static', 1)
         (OUT / f'{name}-static.svg').write_text(static.replace('</style>', STATIC_STYLE + '</style>') + '\n')
     # SVG images can remain in a browser's memory cache across page reloads.
@@ -537,7 +538,7 @@ def main():
         },
         'method_reference': str(METHOD_REFERENCE),
     }, indent=2) + '\n')
-    print('Rendered six self-contained SVG diagrams and six static variants in', OUT)
+    print('Rendered five self-contained SVG diagrams and five static variants in', OUT)
 
 
 if __name__ == '__main__':
