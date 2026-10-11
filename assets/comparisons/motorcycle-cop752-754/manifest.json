@@ -1,0 +1,929 @@
+{
+  "title": "Passing motorcycle",
+  "source_scene": "摩托农夫山泉",
+  "source_run": "/data2/myp/published_projects/GenRec/output/real_tmrec_offical_weights_and_retrain_weights_three_variants",
+  "nominal_source_fps": 757,
+  "ratio": 25,
+  "select_aops": [
+    0,
+    4,
+    8,
+    12,
+    16,
+    20,
+    24
+  ],
+  "cop_range_inclusive": [
+    752,
+    754
+  ],
+  "source_sample_count": 21,
+  "samples": [
+    {
+      "sample": 0,
+      "cop": 752,
+      "aop": 0,
+      "rgb_reference": "rgb_start",
+      "rgb_cop": 752,
+      "tick": 0,
+      "capture_time_seconds": 0.0
+    },
+    {
+      "sample": 1,
+      "cop": 752,
+      "aop": 4,
+      "rgb_reference": "rgb_start",
+      "rgb_cop": 752,
+      "tick": 4,
+      "capture_time_seconds": 0.005284015852047556
+    },
+    {
+      "sample": 2,
+      "cop": 752,
+      "aop": 8,
+      "rgb_reference": "rgb_start",
+      "rgb_cop": 752,
+      "tick": 8,
+      "capture_time_seconds": 0.010568031704095112
+    },
+    {
+      "sample": 3,
+      "cop": 752,
+      "aop": 12,
+      "rgb_reference": "rgb_start",
+      "rgb_cop": 752,
+      "tick": 12,
+      "capture_time_seconds": 0.015852047556142668
+    },
+    {
+      "sample": 4,
+      "cop": 752,
+      "aop": 16,
+      "rgb_reference": "rgb_end",
+      "rgb_cop": 753,
+      "tick": 16,
+      "capture_time_seconds": 0.021136063408190225
+    },
+    {
+      "sample": 5,
+      "cop": 752,
+      "aop": 20,
+      "rgb_reference": "rgb_end",
+      "rgb_cop": 753,
+      "tick": 20,
+      "capture_time_seconds": 0.026420079260237782
+    },
+    {
+      "sample": 6,
+      "cop": 752,
+      "aop": 24,
+      "rgb_reference": "rgb_end",
+      "rgb_cop": 753,
+      "tick": 24,
+      "capture_time_seconds": 0.031704095112285335
+    },
+    {
+      "sample": 7,
+      "cop": 753,
+      "aop": 0,
+      "rgb_reference": "rgb_start",
+      "rgb_cop": 753,
+      "tick": 25,
+      "capture_time_seconds": 0.03302509907529723
+    },
+    {
+      "sample": 8,
+      "cop": 753,
+      "aop": 4,
+      "rgb_reference": "rgb_start",
+      "rgb_cop": 753,
+      "tick": 29,
+      "capture_time_seconds": 0.03830911492734478
+    },
+    {
+      "sample": 9,
+      "cop": 753,
+      "aop": 8,
+      "rgb_reference": "rgb_start",
+      "rgb_cop": 753,
+      "tick": 33,
+      "capture_time_seconds": 0.043593130779392336
+    },
+    {
+      "sample": 10,
+      "cop": 753,
+      "aop": 12,
+      "rgb_reference": "rgb_start",
+      "rgb_cop": 753,
+      "tick": 37,
+      "capture_time_seconds": 0.0488771466314399
+    },
+    {
+      "sample": 11,
+      "cop": 753,
+      "aop": 16,
+      "rgb_reference": "rgb_end",
+      "rgb_cop": 754,
+      "tick": 41,
+      "capture_time_seconds": 0.05416116248348745
+    },
+    {
+      "sample": 12,
+      "cop": 753,
+      "aop": 20,
+      "rgb_reference": "rgb_end",
+      "rgb_cop": 754,
+      "tick": 45,
+      "capture_time_seconds": 0.059445178335535004
+    },
+    {
+      "sample": 13,
+      "cop": 753,
+      "aop": 24,
+      "rgb_reference": "rgb_end",
+      "rgb_cop": 754,
+      "tick": 49,
+      "capture_time_seconds": 0.06472919418758256
+    },
+    {
+      "sample": 14,
+      "cop": 754,
+      "aop": 0,
+      "rgb_reference": "rgb_start",
+      "rgb_cop": 754,
+      "tick": 50,
+      "capture_time_seconds": 0.06605019815059446
+    },
+    {
+      "sample": 15,
+      "cop": 754,
+      "aop": 4,
+      "rgb_reference": "rgb_start",
+      "rgb_cop": 754,
+      "tick": 54,
+      "capture_time_seconds": 0.071334214002642
+    },
+    {
+      "sample": 16,
+      "cop": 754,
+      "aop": 8,
+      "rgb_reference": "rgb_start",
+      "rgb_cop": 754,
+      "tick": 58,
+      "capture_time_seconds": 0.07661822985468957
+    },
+    {
+      "sample": 17,
+      "cop": 754,
+      "aop": 12,
+      "rgb_reference": "rgb_start",
+      "rgb_cop": 754,
+      "tick": 62,
+      "capture_time_seconds": 0.08190224570673713
+    },
+    {
+      "sample": 18,
+      "cop": 754,
+      "aop": 16,
+      "rgb_reference": "rgb_end",
+      "rgb_cop": 755,
+      "tick": 66,
+      "capture_time_seconds": 0.08718626155878467
+    },
+    {
+      "sample": 19,
+      "cop": 754,
+      "aop": 20,
+      "rgb_reference": "rgb_end",
+      "rgb_cop": 755,
+      "tick": 70,
+      "capture_time_seconds": 0.09247027741083223
+    },
+    {
+      "sample": 20,
+      "cop": 754,
+      "aop": 24,
+      "rgb_reference": "rgb_end",
+      "rgb_cop": 755,
+      "tick": 74,
+      "capture_time_seconds": 0.0977542932628798
+    }
+  ],
+  "sample_ticks": [
+    0,
+    4,
+    8,
+    12,
+    16,
+    20,
+    24,
+    25,
+    29,
+    33,
+    37,
+    41,
+    45,
+    49,
+    50,
+    54,
+    58,
+    62,
+    66,
+    70,
+    74
+  ],
+  "duration_ticks": 75,
+  "encoded_frame_count": 75,
+  "encoded_fps": 60,
+  "capture_duration_seconds": 0.09907529722589167,
+  "tile_size": [
+    640,
+    320
+  ],
+  "video_size": [
+    3200,
+    320
+  ],
+  "video_methods": [
+    {
+      "key": "input",
+      "label": "Input RGB",
+      "cache_directory": null,
+      "kind": "Observation"
+    },
+    {
+      "key": "unet",
+      "label": "Tianmouc-UNet",
+      "cache_directory": "008_UNet_NATURE_2024_official_weights",
+      "kind": "Official"
+    },
+    {
+      "key": "igfnet",
+      "label": "IGFNet",
+      "cache_directory": "005_IGFNet_Nature_Sensors_2026_official_weights",
+      "kind": "Official"
+    },
+    {
+      "key": "cbrdm",
+      "label": "CBRDM",
+      "cache_directory": "002_CBRDM_ICCV_2025_official_weights",
+      "kind": "Official"
+    },
+    {
+      "key": "ours",
+      "label": "CoGenRec",
+      "cache_directory": "001_Ours_with_exposure_augmentation",
+      "kind": "Ours"
+    }
+  ],
+  "endpoint_methods": [
+    {
+      "key": "input",
+      "label": "Input RGB",
+      "cache_directory": null,
+      "kind": "Observation"
+    },
+    {
+      "key": "unet",
+      "label": "Tianmouc-UNet",
+      "cache_directory": "008_UNet_NATURE_2024_official_weights",
+      "kind": "Official"
+    },
+    {
+      "key": "igfnet",
+      "label": "IGFNet",
+      "cache_directory": "005_IGFNet_Nature_Sensors_2026_official_weights",
+      "kind": "Official"
+    },
+    {
+      "key": "cbrdm",
+      "label": "CBRDM",
+      "cache_directory": "002_CBRDM_ICCV_2025_official_weights",
+      "kind": "Official"
+    },
+    {
+      "key": "stgdnet",
+      "label": "STGDNet",
+      "cache_directory": "011_STGDNet_CVPR_2026_official_weights",
+      "kind": "Official"
+    },
+    {
+      "key": "ours",
+      "label": "CoGenRec",
+      "cache_directory": "001_Ours_with_exposure_augmentation",
+      "kind": "Ours"
+    }
+  ],
+  "checkpoint_provenance": {
+    "unet": {
+      "label": "UNet (NATURE 2024, official weights)",
+      "resume": "/data2/myp/published_projects/GenRec/output/00_final_HS_HDR_compare_NATURE_7_overexp/checkpoint/best",
+      "pipeline_name": "TianmoucSSLBaselinePipeline",
+      "family": "tmc_ssl",
+      "run_dir": "/data2/myp/published_projects/GenRec/output/00_final_HS_HDR_compare_NATURE_7_overexp",
+      "ckpt_path": "/data2/myp/tmc_projects/TMC-SSL-Representation/unet_nature2024-12-11_fac_1_extreme_31.9(1).ckpt",
+      "denoising_steps": null,
+      "decode_chunk_size": null,
+      "sr_resume": null,
+      "sr_run_dir": null,
+      "sr_ckpt_path": null,
+      "sr_denoising_steps": null,
+      "elapsed_seconds": 91.30343731120229
+    },
+    "igfnet": {
+      "label": "IGFNet (Nature Sensors 2026, official weights)",
+      "resume": "/data2/myp/published_projects/GenRec/output/00_final_HS_HDR_compare_IGFNet_7_overexp/checkpoint/best",
+      "pipeline_name": "TianmoucSSLBaselinePipeline",
+      "family": "tmc_ssl",
+      "run_dir": "/data2/myp/published_projects/GenRec/output/00_final_HS_HDR_compare_IGFNet_7_overexp",
+      "ckpt_path": "/data2/myp/tmc_projects/TMC-SSL-Representation/IGFNet2024-12-14_fac_2ver_best_34.5(1).ckpt",
+      "denoising_steps": null,
+      "decode_chunk_size": null,
+      "sr_resume": null,
+      "sr_run_dir": null,
+      "sr_ckpt_path": null,
+      "sr_denoising_steps": null,
+      "elapsed_seconds": 131.5199313526973
+    },
+    "cbrdm": {
+      "label": "CBRDM (ICCV 2025, official weights)",
+      "resume": "/data2/myp/published_projects/GenRec/output/000_final_HS_HDR_campare_CBRDM_7_overexp/checkpoint/iter_190000",
+      "pipeline_name": "TianmoucSingleStageReconstructionPipeline",
+      "family": "cbrdm_sr",
+      "run_dir": "/data2/myp/published_projects/GenRec/output/000_final_HS_HDR_campare_CBRDM_7_overexp",
+      "ckpt_path": "/data2/myp/published_projects/GenRec_ICCV/checkpoints/TianmoucRec_CBRDM/unet/diffusion_pytorch_model.bin",
+      "denoising_steps": 200,
+      "decode_chunk_size": null,
+      "sr_resume": "/data2/myp/published_projects/GenRec/output/000_final_HS_HDR_campare_CBRDM_SR_7_overexp/checkpoint/iter_100000",
+      "sr_run_dir": "/data2/myp/published_projects/GenRec/output/000_final_HS_HDR_campare_CBRDM_SR_7_overexp",
+      "sr_ckpt_path": "/data2/myp/published_projects/GenRec_ICCV/checkpoints/TianmoucRec_CBRDM/sr_unet/diffusion_pytorch_model.bin",
+      "sr_denoising_steps": 50,
+      "elapsed_seconds": 7996.192789413966
+    },
+    "stgdnet": {
+      "label": "STGDNet (CVPR 2026, official weights)",
+      "resume": "/data2/myp/published_projects/GenRec/output/00_final_HS_HDR_compare_STGDNet_overexp/checkpoint/best",
+      "pipeline_name": "STGDNetBaselinePipeline",
+      "family": "stgdnet",
+      "run_dir": "/data2/myp/published_projects/GenRec/output/00_final_HS_HDR_compare_STGDNet_overexp",
+      "ckpt_path": "/data2/myp/tmc_projects/tmcDeblur/Standard_Model.pth",
+      "denoising_steps": null,
+      "decode_chunk_size": null,
+      "sr_resume": null,
+      "sr_run_dir": null,
+      "sr_ckpt_path": null,
+      "sr_denoising_steps": null,
+      "elapsed_seconds": 47.906521486118436
+    },
+    "ours": {
+      "label": "Ours (with exposure augmentation)",
+      "resume": "/data2/myp/published_projects/GenRec/output/00_final_HS_HDR_animatediff_controlnet_7_ablation_full_overexp_initoeunet_attentionmask_oursdecoder/checkpoint/iter_030000",
+      "pipeline_name": "TianmoucHSHDRDeblurAnimateDiffControlNetOursDecoderPipeline",
+      "family": "hs_hdr",
+      "run_dir": "/data2/myp/published_projects/GenRec/output/00_final_HS_HDR_animatediff_controlnet_7_ablation_full_overexp_initoeunet_attentionmask_oursdecoder",
+      "ckpt_path": null,
+      "denoising_steps": 50,
+      "decode_chunk_size": 4,
+      "sr_resume": null,
+      "sr_run_dir": null,
+      "sr_ckpt_path": null,
+      "sr_denoising_steps": null,
+      "elapsed_seconds": 1403.0405619973317
+    }
+  },
+  "synchronization": "All five method panels baked into one video; canvases render corresponding tiles from that same decoded frame",
+  "timeline_policy": "Hold each retained AOP until the next; no inferred intermediate frames",
+  "rgb_policy": "First half of each COP interval uses rgb_start; second half uses rgb_end; exact midpoint uses rgb_start",
+  "rgb_switch_aop": 13,
+  "encoded_frames": [
+    {
+      "frame": 0,
+      "source_sample": 0
+    },
+    {
+      "frame": 1,
+      "source_sample": 0
+    },
+    {
+      "frame": 2,
+      "source_sample": 0
+    },
+    {
+      "frame": 3,
+      "source_sample": 0
+    },
+    {
+      "frame": 4,
+      "source_sample": 1
+    },
+    {
+      "frame": 5,
+      "source_sample": 1
+    },
+    {
+      "frame": 6,
+      "source_sample": 1
+    },
+    {
+      "frame": 7,
+      "source_sample": 1
+    },
+    {
+      "frame": 8,
+      "source_sample": 2
+    },
+    {
+      "frame": 9,
+      "source_sample": 2
+    },
+    {
+      "frame": 10,
+      "source_sample": 2
+    },
+    {
+      "frame": 11,
+      "source_sample": 2
+    },
+    {
+      "frame": 12,
+      "source_sample": 3
+    },
+    {
+      "frame": 13,
+      "source_sample": 3
+    },
+    {
+      "frame": 14,
+      "source_sample": 3
+    },
+    {
+      "frame": 15,
+      "source_sample": 3
+    },
+    {
+      "frame": 16,
+      "source_sample": 4
+    },
+    {
+      "frame": 17,
+      "source_sample": 4
+    },
+    {
+      "frame": 18,
+      "source_sample": 4
+    },
+    {
+      "frame": 19,
+      "source_sample": 4
+    },
+    {
+      "frame": 20,
+      "source_sample": 5
+    },
+    {
+      "frame": 21,
+      "source_sample": 5
+    },
+    {
+      "frame": 22,
+      "source_sample": 5
+    },
+    {
+      "frame": 23,
+      "source_sample": 5
+    },
+    {
+      "frame": 24,
+      "source_sample": 6
+    },
+    {
+      "frame": 25,
+      "source_sample": 7
+    },
+    {
+      "frame": 26,
+      "source_sample": 7
+    },
+    {
+      "frame": 27,
+      "source_sample": 7
+    },
+    {
+      "frame": 28,
+      "source_sample": 7
+    },
+    {
+      "frame": 29,
+      "source_sample": 8
+    },
+    {
+      "frame": 30,
+      "source_sample": 8
+    },
+    {
+      "frame": 31,
+      "source_sample": 8
+    },
+    {
+      "frame": 32,
+      "source_sample": 8
+    },
+    {
+      "frame": 33,
+      "source_sample": 9
+    },
+    {
+      "frame": 34,
+      "source_sample": 9
+    },
+    {
+      "frame": 35,
+      "source_sample": 9
+    },
+    {
+      "frame": 36,
+      "source_sample": 9
+    },
+    {
+      "frame": 37,
+      "source_sample": 10
+    },
+    {
+      "frame": 38,
+      "source_sample": 10
+    },
+    {
+      "frame": 39,
+      "source_sample": 10
+    },
+    {
+      "frame": 40,
+      "source_sample": 10
+    },
+    {
+      "frame": 41,
+      "source_sample": 11
+    },
+    {
+      "frame": 42,
+      "source_sample": 11
+    },
+    {
+      "frame": 43,
+      "source_sample": 11
+    },
+    {
+      "frame": 44,
+      "source_sample": 11
+    },
+    {
+      "frame": 45,
+      "source_sample": 12
+    },
+    {
+      "frame": 46,
+      "source_sample": 12
+    },
+    {
+      "frame": 47,
+      "source_sample": 12
+    },
+    {
+      "frame": 48,
+      "source_sample": 12
+    },
+    {
+      "frame": 49,
+      "source_sample": 13
+    },
+    {
+      "frame": 50,
+      "source_sample": 14
+    },
+    {
+      "frame": 51,
+      "source_sample": 14
+    },
+    {
+      "frame": 52,
+      "source_sample": 14
+    },
+    {
+      "frame": 53,
+      "source_sample": 14
+    },
+    {
+      "frame": 54,
+      "source_sample": 15
+    },
+    {
+      "frame": 55,
+      "source_sample": 15
+    },
+    {
+      "frame": 56,
+      "source_sample": 15
+    },
+    {
+      "frame": 57,
+      "source_sample": 15
+    },
+    {
+      "frame": 58,
+      "source_sample": 16
+    },
+    {
+      "frame": 59,
+      "source_sample": 16
+    },
+    {
+      "frame": 60,
+      "source_sample": 16
+    },
+    {
+      "frame": 61,
+      "source_sample": 16
+    },
+    {
+      "frame": 62,
+      "source_sample": 17
+    },
+    {
+      "frame": 63,
+      "source_sample": 17
+    },
+    {
+      "frame": 64,
+      "source_sample": 17
+    },
+    {
+      "frame": 65,
+      "source_sample": 17
+    },
+    {
+      "frame": 66,
+      "source_sample": 18
+    },
+    {
+      "frame": 67,
+      "source_sample": 18
+    },
+    {
+      "frame": 68,
+      "source_sample": 18
+    },
+    {
+      "frame": 69,
+      "source_sample": 18
+    },
+    {
+      "frame": 70,
+      "source_sample": 19
+    },
+    {
+      "frame": 71,
+      "source_sample": 19
+    },
+    {
+      "frame": 72,
+      "source_sample": 19
+    },
+    {
+      "frame": 73,
+      "source_sample": 19
+    },
+    {
+      "frame": 74,
+      "source_sample": 20
+    }
+  ],
+  "fast_previews": {
+    "1": {
+      "encoded_ticks": [
+        0,
+        13,
+        25,
+        38,
+        50,
+        63
+      ],
+      "source_samples": [
+        0,
+        3,
+        7,
+        10,
+        14,
+        17
+      ],
+      "frame_count": 6
+    },
+    "2": {
+      "encoded_ticks": [
+        0,
+        6,
+        13,
+        19,
+        25,
+        32,
+        38,
+        44,
+        50,
+        57,
+        63,
+        69
+      ],
+      "source_samples": [
+        0,
+        1,
+        3,
+        4,
+        7,
+        8,
+        10,
+        11,
+        14,
+        15,
+        17,
+        18
+      ],
+      "frame_count": 12
+    }
+  },
+  "endpoint_policy": "F0 at AOP 0 of each selected COP; STGDNet frames[0] is used only here",
+  "endpoint_images": [
+    {
+      "cop": 752,
+      "aop": 0,
+      "images": {
+        "input": {
+          "image": "endpoint-cop752-input.png",
+          "crop": "endpoint-cop752-input-crop.png"
+        },
+        "unet": {
+          "image": "endpoint-cop752-unet.png",
+          "crop": "endpoint-cop752-unet-crop.png"
+        },
+        "igfnet": {
+          "image": "endpoint-cop752-igfnet.png",
+          "crop": "endpoint-cop752-igfnet-crop.png"
+        },
+        "cbrdm": {
+          "image": "endpoint-cop752-cbrdm.png",
+          "crop": "endpoint-cop752-cbrdm-crop.png"
+        },
+        "stgdnet": {
+          "image": "endpoint-cop752-stgdnet.png",
+          "crop": "endpoint-cop752-stgdnet-crop.png"
+        },
+        "ours": {
+          "image": "endpoint-cop752-ours.png",
+          "crop": "endpoint-cop752-ours-crop.png"
+        }
+      }
+    },
+    {
+      "cop": 753,
+      "aop": 0,
+      "images": {
+        "input": {
+          "image": "endpoint-cop753-input.png",
+          "crop": "endpoint-cop753-input-crop.png"
+        },
+        "unet": {
+          "image": "endpoint-cop753-unet.png",
+          "crop": "endpoint-cop753-unet-crop.png"
+        },
+        "igfnet": {
+          "image": "endpoint-cop753-igfnet.png",
+          "crop": "endpoint-cop753-igfnet-crop.png"
+        },
+        "cbrdm": {
+          "image": "endpoint-cop753-cbrdm.png",
+          "crop": "endpoint-cop753-cbrdm-crop.png"
+        },
+        "stgdnet": {
+          "image": "endpoint-cop753-stgdnet.png",
+          "crop": "endpoint-cop753-stgdnet-crop.png"
+        },
+        "ours": {
+          "image": "endpoint-cop753-ours.png",
+          "crop": "endpoint-cop753-ours-crop.png"
+        }
+      }
+    },
+    {
+      "cop": 754,
+      "aop": 0,
+      "images": {
+        "input": {
+          "image": "endpoint-cop754-input.png",
+          "crop": "endpoint-cop754-input-crop.png"
+        },
+        "unet": {
+          "image": "endpoint-cop754-unet.png",
+          "crop": "endpoint-cop754-unet-crop.png"
+        },
+        "igfnet": {
+          "image": "endpoint-cop754-igfnet.png",
+          "crop": "endpoint-cop754-igfnet-crop.png"
+        },
+        "cbrdm": {
+          "image": "endpoint-cop754-cbrdm.png",
+          "crop": "endpoint-cop754-cbrdm-crop.png"
+        },
+        "stgdnet": {
+          "image": "endpoint-cop754-stgdnet.png",
+          "crop": "endpoint-cop754-stgdnet-crop.png"
+        },
+        "ours": {
+          "image": "endpoint-cop754-ours.png",
+          "crop": "endpoint-cop754-ours-crop.png"
+        }
+      }
+    }
+  ],
+  "detail_roi_xywh": [
+    0,
+    40,
+    400,
+    280
+  ],
+  "sources": [
+    {
+      "path": "/data2/myp/published_projects/GenRec/output/real_tmrec_offical_weights_and_retrain_weights_three_variants/_workers/worker_003/resolved_run.json",
+      "sha256": "52b31dd09891b1325c5663a7a3e55721ef7368bbb164029f3c982308ddef9901"
+    },
+    {
+      "path": "/data2/myp/published_projects/GenRec/output/real_tmrec_offical_weights_and_retrain_weights_three_variants/_cache/worker_003/reference/csv000_row000060_cop000752.npz",
+      "sha256": "9ea1d91d8b5e958cfccc8384a3fc7800b5af1c0ed8eed427aa9106607de4502e"
+    },
+    {
+      "path": "/data2/myp/published_projects/GenRec/output/real_tmrec_offical_weights_and_retrain_weights_three_variants/_cache/worker_003/methods/008_UNet_NATURE_2024_official_weights/csv000_row000060_cop000752.npz",
+      "sha256": "2ae68065ab8b97d065079f1217b27970b94130a75c3eef6206d5873de648ab93"
+    },
+    {
+      "path": "/data2/myp/published_projects/GenRec/output/real_tmrec_offical_weights_and_retrain_weights_three_variants/_cache/worker_003/methods/005_IGFNet_Nature_Sensors_2026_official_weights/csv000_row000060_cop000752.npz",
+      "sha256": "9df34384719b017b29df305da87cb991addb85d8266fc45c3fa5d8736784c880"
+    },
+    {
+      "path": "/data2/myp/published_projects/GenRec/output/real_tmrec_offical_weights_and_retrain_weights_three_variants/_cache/worker_003/methods/002_CBRDM_ICCV_2025_official_weights/csv000_row000060_cop000752.npz",
+      "sha256": "ae8ef68741d47827762b06234e25abd8aed60134a44f89e6927f2b347551b7b2"
+    },
+    {
+      "path": "/data2/myp/published_projects/GenRec/output/real_tmrec_offical_weights_and_retrain_weights_three_variants/_cache/worker_003/methods/011_STGDNet_CVPR_2026_official_weights/csv000_row000060_cop000752.npz",
+      "sha256": "2948d999682c2ea685d439713a0a8c3a24ca5e73c10a0a9c117420e057afba61"
+    },
+    {
+      "path": "/data2/myp/published_projects/GenRec/output/real_tmrec_offical_weights_and_retrain_weights_three_variants/_cache/worker_003/methods/001_Ours_with_exposure_augmentation/csv000_row000060_cop000752.npz",
+      "sha256": "380714c46e2d2581da408b52df700e2d747907dba5da5bfcb12776ea73e69a05"
+    },
+    {
+      "path": "/data2/myp/published_projects/GenRec/output/real_tmrec_offical_weights_and_retrain_weights_three_variants/_cache/worker_003/reference/csv000_row000060_cop000753.npz",
+      "sha256": "75dc8019032ee819d2f75ff52dc37dc5a63c4f95e7f254887f2c087f5d027b89"
+    },
+    {
+      "path": "/data2/myp/published_projects/GenRec/output/real_tmrec_offical_weights_and_retrain_weights_three_variants/_cache/worker_003/methods/008_UNet_NATURE_2024_official_weights/csv000_row000060_cop000753.npz",
+      "sha256": "88dc856fe73964496e8f9464b4b580da6c2d84f20342015c9c732dbf6a5c9260"
+    },
+    {
+      "path": "/data2/myp/published_projects/GenRec/output/real_tmrec_offical_weights_and_retrain_weights_three_variants/_cache/worker_003/methods/005_IGFNet_Nature_Sensors_2026_official_weights/csv000_row000060_cop000753.npz",
+      "sha256": "f16490c10718f6b1c53efe157c2ce69cedeeed0f6c689b7d003e3668e5a40e64"
+    },
+    {
+      "path": "/data2/myp/published_projects/GenRec/output/real_tmrec_offical_weights_and_retrain_weights_three_variants/_cache/worker_003/methods/002_CBRDM_ICCV_2025_official_weights/csv000_row000060_cop000753.npz",
+      "sha256": "a54250b8c52ccc801a813aff3a75416111d3b8809215f82d617667897d208f75"
+    },
+    {
+      "path": "/data2/myp/published_projects/GenRec/output/real_tmrec_offical_weights_and_retrain_weights_three_variants/_cache/worker_003/methods/011_STGDNet_CVPR_2026_official_weights/csv000_row000060_cop000753.npz",
+      "sha256": "06b5f9a9b061b5001731e97067a17e5cf814d10fa9635d8ac48065fee6a5061a"
+    },
+    {
+      "path": "/data2/myp/published_projects/GenRec/output/real_tmrec_offical_weights_and_retrain_weights_three_variants/_cache/worker_003/methods/001_Ours_with_exposure_augmentation/csv000_row000060_cop000753.npz",
+      "sha256": "437b429c34019c49d381451041efb0eb6055d3019944e0ab07db7b6ab94cb120"
+    },
+    {
+      "path": "/data2/myp/published_projects/GenRec/output/real_tmrec_offical_weights_and_retrain_weights_three_variants/_cache/worker_003/reference/csv000_row000060_cop000754.npz",
+      "sha256": "5c4584e232d1f2dd89ff45907436cd99664db4e5b16d2f8d8a808beb27140a0c"
+    },
+    {
+      "path": "/data2/myp/published_projects/GenRec/output/real_tmrec_offical_weights_and_retrain_weights_three_variants/_cache/worker_003/methods/008_UNet_NATURE_2024_official_weights/csv000_row000060_cop000754.npz",
+      "sha256": "8d0fa08b10ebafbf7f36d4de50a10f4ccef021c83ec2d2cbf181360a6fbe7e6b"
+    },
+    {
+      "path": "/data2/myp/published_projects/GenRec/output/real_tmrec_offical_weights_and_retrain_weights_three_variants/_cache/worker_003/methods/005_IGFNet_Nature_Sensors_2026_official_weights/csv000_row000060_cop000754.npz",
+      "sha256": "13076e39873bde4ca46404329fc907557b7b3d8c82a9588dd34430246ea9538b"
+    },
+    {
+      "path": "/data2/myp/published_projects/GenRec/output/real_tmrec_offical_weights_and_retrain_weights_three_variants/_cache/worker_003/methods/002_CBRDM_ICCV_2025_official_weights/csv000_row000060_cop000754.npz",
+      "sha256": "635c1f5f02f97ee59006c1c5d421df70410310002155be4dd7bc99300205c752"
+    },
+    {
+      "path": "/data2/myp/published_projects/GenRec/output/real_tmrec_offical_weights_and_retrain_weights_three_variants/_cache/worker_003/methods/011_STGDNet_CVPR_2026_official_weights/csv000_row000060_cop000754.npz",
+      "sha256": "af322a738c81d4738a5bafb4b7700880bd5d55d0786b1b79ecc57bfa08e9719d"
+    },
+    {
+      "path": "/data2/myp/published_projects/GenRec/output/real_tmrec_offical_weights_and_retrain_weights_three_variants/_cache/worker_003/methods/001_Ours_with_exposure_augmentation/csv000_row000060_cop000754.npz",
+      "sha256": "ece9a1b6b8e76d574f3bc88fdb9e7a0ad627a373ac752779bc9cea109658c46f"
+    }
+  ]
+}

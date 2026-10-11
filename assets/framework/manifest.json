@@ -1,0 +1,450 @@
+{
+  "source_inputs": "/data2/myp/published_projects/GenRec/output/real_tmrec_varlen_oursdecoder_iter010000_waterball2_cop058_059_gpu6/input_frames/cop000058",
+  "cop": 58,
+  "input_metadata": {
+    "scene": "\u6c34-\u624e\u7834\u88c5\u6c34\u84dd\u6c14\u7403",
+    "cop": 58,
+    "ratio": 25,
+    "T": 26,
+    "select_aops": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25
+    ],
+    "cone_exp_period": 3,
+    "td_in_exposure_valid_frames": 2,
+    "td_in_exposure_padded_frames": 34,
+    "td_between_exposure_frames": 27,
+    "sd_between_exposure_frames_per_channel": 26,
+    "sensor_native_hw": [
+      160,
+      160
+    ],
+    "rgb_hw": [
+      320,
+      640
+    ],
+    "png_hw": [
+      320,
+      640
+    ],
+    "visualization": "signed values: negative red, positive blue, threshold=0.01, gain=16",
+    "raw_arrays": "raw_inputs_float32.npz preserves exact model inputs"
+  },
+  "raw_inputs_sha256": "3df5fc73c113d3c1bd573e6f7df5ecb874300bd4b3e730c6777c05733a16dbfd",
+  "thumbnails": {
+    "rgb0": {
+      "source": "/data2/myp/published_projects/GenRec/output/real_tmrec_varlen_oursdecoder_iter010000_waterball2_cop058_059_gpu6/input_frames/cop000058/rgb_endpoints/RGB0.png",
+      "sha256": "db81209f483071488bf293084b8ffc59375af64fb11fea9d70a0a6eb41447e29",
+      "transform": "none"
+    },
+    "rgb1": {
+      "source": "/data2/myp/published_projects/GenRec/output/real_tmrec_varlen_oursdecoder_iter010000_waterball2_cop058_059_gpu6/input_frames/cop000058/rgb_endpoints/RGB1.png",
+      "sha256": "6ffd809b94dc5b5d4fd99d7c2b6b1619c0cdbf2d19c64f319c89f7123ad94883",
+      "transform": "none"
+    },
+    "sd_in0": {
+      "source": "/data2/myp/published_projects/GenRec/output/real_tmrec_varlen_oursdecoder_iter010000_waterball2_cop058_059_gpu6/input_frames/cop000058/sd_in_exposure/RGB0/channel_0.png",
+      "sha256": "24a7098ec43111e190e636571cd1dbab20fc8e2dd88b6ef2ab133500c2419547",
+      "transform": "horizontal mirror"
+    },
+    "td_in00": {
+      "source": "/data2/myp/published_projects/GenRec/output/real_tmrec_varlen_oursdecoder_iter010000_waterball2_cop058_059_gpu6/input_frames/cop000058/td_in_exposure/RGB0/frame_000_valid.png",
+      "sha256": "92f57659ef4f72ee5a54baaff701e1616c18ab609137870a63703ea823cfb13e",
+      "transform": "horizontal mirror"
+    },
+    "td_in01": {
+      "source": "/data2/myp/published_projects/GenRec/output/real_tmrec_varlen_oursdecoder_iter010000_waterball2_cop058_059_gpu6/input_frames/cop000058/td_in_exposure/RGB0/frame_001_valid.png",
+      "sha256": "9910422c23fee7781c76895c5f266efc2b4fec5528f0022c2f468d88ad282e53",
+      "transform": "horizontal mirror"
+    },
+    "sd_in1": {
+      "source": "/data2/myp/published_projects/GenRec/output/real_tmrec_varlen_oursdecoder_iter010000_waterball2_cop058_059_gpu6/input_frames/cop000058/sd_in_exposure/RGB1/channel_0.png",
+      "sha256": "08b96b6147b3d09a7d7b7115fbece8e594862f2fe1e7f401f30e73b7e09e5466",
+      "transform": "horizontal mirror"
+    },
+    "td_in10": {
+      "source": "/data2/myp/published_projects/GenRec/output/real_tmrec_varlen_oursdecoder_iter010000_waterball2_cop058_059_gpu6/input_frames/cop000058/td_in_exposure/RGB1/frame_000_valid.png",
+      "sha256": "2792c798e7498c4b14dd07f6ce0070c51e3ee7651d4c99f2cd081cd82dc6c471",
+      "transform": "horizontal mirror"
+    },
+    "td_in11": {
+      "source": "/data2/myp/published_projects/GenRec/output/real_tmrec_varlen_oursdecoder_iter010000_waterball2_cop058_059_gpu6/input_frames/cop000058/td_in_exposure/RGB1/frame_001_valid.png",
+      "sha256": "4ee3008781561d838255afff5cfec6cf1b3706aa4cde1d016fbaad8338c82c05",
+      "transform": "horizontal mirror"
+    },
+    "sd_btw0": {
+      "source": "/data2/myp/published_projects/GenRec/output/real_tmrec_varlen_oursdecoder_iter010000_waterball2_cop058_059_gpu6/input_frames/cop000058/sd_between_exposure/channel_0/frame_000.png",
+      "sha256": "24a7098ec43111e190e636571cd1dbab20fc8e2dd88b6ef2ab133500c2419547",
+      "transform": "horizontal mirror"
+    },
+    "sd_btw1": {
+      "source": "/data2/myp/published_projects/GenRec/output/real_tmrec_varlen_oursdecoder_iter010000_waterball2_cop058_059_gpu6/input_frames/cop000058/sd_between_exposure/channel_0/frame_001.png",
+      "sha256": "2f78c680b9a370077a26f702338ea739be36adaf5a2866a31b6ef671cb47b629",
+      "transform": "horizontal mirror"
+    },
+    "sd_btw2": {
+      "source": "/data2/myp/published_projects/GenRec/output/real_tmrec_varlen_oursdecoder_iter010000_waterball2_cop058_059_gpu6/input_frames/cop000058/sd_between_exposure/channel_0/frame_002.png",
+      "sha256": "054907b07a4c61e3a36031393061a2b023483236075b3ae4851a5e74006c81a3",
+      "transform": "horizontal mirror"
+    },
+    "sd_btw23": {
+      "source": "/data2/myp/published_projects/GenRec/output/real_tmrec_varlen_oursdecoder_iter010000_waterball2_cop058_059_gpu6/input_frames/cop000058/sd_between_exposure/channel_0/frame_023.png",
+      "sha256": "12c5358f058e6b646b6a14a1962f30885672e39c8994b0f393138ccdc26843c6",
+      "transform": "horizontal mirror"
+    },
+    "sd_btw24": {
+      "source": "/data2/myp/published_projects/GenRec/output/real_tmrec_varlen_oursdecoder_iter010000_waterball2_cop058_059_gpu6/input_frames/cop000058/sd_between_exposure/channel_0/frame_024.png",
+      "sha256": "3b2d558a7847096ca96732cb9c1d92c9b6adc9d9c444655a8399c8644130c6bc",
+      "transform": "horizontal mirror"
+    },
+    "sd_btw25": {
+      "source": "/data2/myp/published_projects/GenRec/output/real_tmrec_varlen_oursdecoder_iter010000_waterball2_cop058_059_gpu6/input_frames/cop000058/sd_between_exposure/channel_0/frame_025.png",
+      "sha256": "08b96b6147b3d09a7d7b7115fbece8e594862f2fe1e7f401f30e73b7e09e5466",
+      "transform": "horizontal mirror"
+    },
+    "td_btw1": {
+      "source": "/data2/myp/published_projects/GenRec/output/real_tmrec_varlen_oursdecoder_iter010000_waterball2_cop058_059_gpu6/input_frames/cop000058/td_between_exposure/frame_001.png",
+      "sha256": "9910422c23fee7781c76895c5f266efc2b4fec5528f0022c2f468d88ad282e53",
+      "transform": "horizontal mirror"
+    },
+    "td_btw2": {
+      "source": "/data2/myp/published_projects/GenRec/output/real_tmrec_varlen_oursdecoder_iter010000_waterball2_cop058_059_gpu6/input_frames/cop000058/td_between_exposure/frame_002.png",
+      "sha256": "cea9a012c4dcc3b5dc047bdebee8fbe6bbfcb954ece2e7466c0cb8751368b0cb",
+      "transform": "horizontal mirror"
+    },
+    "td_btw24": {
+      "source": "/data2/myp/published_projects/GenRec/output/real_tmrec_varlen_oursdecoder_iter010000_waterball2_cop058_059_gpu6/input_frames/cop000058/td_between_exposure/frame_024.png",
+      "sha256": "9041a57448609c384781a111c10b218c6817771d7319a517c35d7700bad54927",
+      "transform": "horizontal mirror"
+    },
+    "td_btw25": {
+      "source": "/data2/myp/published_projects/GenRec/output/real_tmrec_varlen_oursdecoder_iter010000_waterball2_cop058_059_gpu6/input_frames/cop000058/td_between_exposure/frame_025.png",
+      "sha256": "2792c798e7498c4b14dd07f6ce0070c51e3ee7651d4c99f2cd081cd82dc6c471",
+      "transform": "horizontal mirror"
+    },
+    "pred0": {
+      "source": "/data2/myp/published_projects/GenRec/output/real_tmrec_varlen_oursdecoder_iter010000_waterball2_cop058_059_gpu6/_cache/methods/000_VarLen_OursDecoder_iter_010000/csv000_row000000_cop000058.npz",
+      "frame": 0,
+      "transform": "none",
+      "sha256": "b299b887af353b4bed24b39213236741dfa0af25f37b6257281d2f297aee4dde"
+    },
+    "pred1": {
+      "source": "/data2/myp/published_projects/GenRec/output/real_tmrec_varlen_oursdecoder_iter010000_waterball2_cop058_059_gpu6/_cache/methods/000_VarLen_OursDecoder_iter_010000/csv000_row000000_cop000058.npz",
+      "frame": 25,
+      "transform": "none",
+      "sha256": "b299b887af353b4bed24b39213236741dfa0af25f37b6257281d2f297aee4dde"
+    }
+  },
+  "shared_timeline": {
+    "rgb_center_times": [
+      0,
+      25
+    ],
+    "exposure_duration_aop_periods": 3,
+    "sd_channel": 0,
+    "sd_sample_times": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25
+    ],
+    "td_source_indices": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25
+    ],
+    "excluded_td_padding_indices": [
+      0,
+      26
+    ],
+    "td_intervals": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        6
+      ],
+      [
+        6,
+        7
+      ],
+      [
+        7,
+        8
+      ],
+      [
+        8,
+        9
+      ],
+      [
+        9,
+        10
+      ],
+      [
+        10,
+        11
+      ],
+      [
+        11,
+        12
+      ],
+      [
+        12,
+        13
+      ],
+      [
+        13,
+        14
+      ],
+      [
+        14,
+        15
+      ],
+      [
+        15,
+        16
+      ],
+      [
+        16,
+        17
+      ],
+      [
+        17,
+        18
+      ],
+      [
+        18,
+        19
+      ],
+      [
+        19,
+        20
+      ],
+      [
+        20,
+        21
+      ],
+      [
+        21,
+        22
+      ],
+      [
+        22,
+        23
+      ],
+      [
+        23,
+        24
+      ],
+      [
+        24,
+        25
+      ]
+    ],
+    "intra_td_offsets_per_endpoint": [
+      [
+        -1,
+        0
+      ],
+      [
+        0,
+        1
+      ]
+    ],
+    "displayed_sd_times": [
+      0,
+      1,
+      2,
+      23,
+      24,
+      25
+    ],
+    "displayed_td_start_times": [
+      0,
+      1,
+      23,
+      24
+    ],
+    "omitted_middle_sd_times": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22
+    ],
+    "omitted_td_start_times": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22
+    ],
+    "display_x": {
+      "0": 300,
+      "1": 364,
+      "2": 428,
+      "23": 532,
+      "24": 596,
+      "25": 660
+    },
+    "axis_break": "The middle is omitted consistently across all rows; endpoint regions retain equal AOP spacing."
+  },
+  "policy": "TD and SD thumbnails are horizontally mirrored; RGB and predicted RGB are embedded unchanged. Only photographic/sensor thumbnails are raster. Source data and videos are never modified.",
+  "animation": "CSS temporal scanning only; all connection arrows are static and detail features remain solid and opaque; prefers-reduced-motion selects unconditional static variants via HTML picture sources",
+  "asset_versions": {
+    "cogenrec-framework-static.svg": "660b6ce4bebc",
+    "cogenrec-framework.svg": "01fc0cabf5a1",
+    "endpoint-encoder-static.svg": "081b08322694",
+    "endpoint-encoder.svg": "ba1aed189447",
+    "measurements-static.svg": "bb5b27bb1800",
+    "measurements.svg": "c7caf47aca47",
+    "reconstruction-mobile-static.svg": "86ea3ca8d30e",
+    "reconstruction-mobile.svg": "b0017eca5955",
+    "reconstruction-static.svg": "78035b9b098f",
+    "reconstruction.svg": "005de1d33d78",
+    "temporal-propagator-static.svg": "745a5e8cac17",
+    "temporal-propagator.svg": "d913dd5921d1"
+  },
+  "interaction_script_version": "9bdd1386541e",
+  "interaction_groups": [
+    "endpoint-0",
+    "endpoint-1",
+    "endpoint-inputs",
+    "between",
+    "encoder",
+    "propagator"
+  ],
+  "temporal_propagator": {
+    "implementation_reference": "CBRDM/TMRGBTSDInterpolation_full.py: BiIterativeTSDInterpolatorFull.forward",
+    "forward_inputs": {
+      "td_index": "t",
+      "sd_index": "t",
+      "direction": "left to right"
+    },
+    "backward_inputs": {
+      "td_index": "t+1",
+      "sd_index": "t",
+      "direction": "right to left"
+    },
+    "control_volume": "V_ctrl^t concatenates both post-update hidden states at time t",
+    "layout": "Horizontally staggered forward and backward chains with aligned outer inputs; shared central time-indexed outputs receive both post-update states through straight vertical arrows"
+  },
+  "method_reference": "/data2/myp/overleaf_projects/Tianmouc-HS-HDR-Deblur-Submitted-to-PAMI-/sec/3_method.tex"
+}

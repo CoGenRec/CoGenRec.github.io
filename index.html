@@ -1,0 +1,803 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="CoGenRec: A Unified Generative Framework for Complementary Vision Reconstruction. Real-world results and method comparisons.">
+  <meta name="color-scheme" content="light">
+  <title>CoGenRec · Complementary Vision Reconstruction</title>
+  <style>
+    :root {
+      --page: #fafbf9;
+      --surface: #ffffff;
+      --ink: #172435;
+      --muted: #536477;
+      --line: #e0e6eb;
+      --blue: #295bd7;
+      --blue-soft: #eef3ff;
+      --stage: #142333;
+      --stage-text: #e7edf5;
+      --stage-muted: #a5b4c5;
+      --radius: 18px;
+      --width: 1280px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body { margin: 0; color: var(--ink); background: var(--page); font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-size: 17px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    button, select, input { font: inherit; }
+    button, a, select { -webkit-tap-highlight-color: transparent; }
+    button, select { cursor: pointer; }
+    button:disabled { cursor: not-allowed; }
+    button:focus-visible, a:focus-visible, select:focus-visible, input:focus-visible { outline: 3px solid #6f9bff; outline-offset: 4px; }
+    a { color: inherit; text-decoration: none; }
+    button { color: inherit; }
+    h1, h2, h3, p, figure { margin: 0; }
+    h2 { font-size: clamp(28px, 3.2vw, 39px); line-height: 1.22; font-weight: 620; letter-spacing: -1.3px; }
+    h3 { font-size: 22px; line-height: 1.4; font-weight: 600; letter-spacing: -.35px; }
+    svg.icon { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.65; stroke-linecap: round; stroke-linejoin: round; flex: 0 0 auto; }
+    .container { width: min(var(--width), calc(100% - 64px)); margin-inline: auto; }
+    .skip-link { position: absolute; top: 8px; left: 12px; padding: 10px 16px; background: var(--surface); z-index: 20; transform: translateY(-150%); }
+    .skip-link:focus { transform: translateY(0); }
+    .topbar { position: sticky; top: 0; z-index: 10; border-bottom: 1px solid var(--line); background: rgba(250, 251, 249, .96); backdrop-filter: blur(14px); }
+    .topbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 72px; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-size: 21px; font-weight: 650; letter-spacing: -.6px; }
+    .brand-mark { width: 25px; height: 25px; position: relative; border: 1.6px solid var(--blue); border-radius: 7px; }
+    .brand-mark::before, .brand-mark::after { content: ""; position: absolute; width: 9px; height: 9px; border: 1.5px solid var(--blue); border-radius: 3px; }
+    .brand-mark::before { top: 4px; left: 4px; }
+    .brand-mark::after { right: 3px; bottom: 3px; background: var(--page); }
+    .nav { display: flex; align-items: center; gap: 25px; font-size: 15px; color: var(--muted); }
+    .nav a:hover { color: var(--blue); }
+    .eyebrow { color: var(--blue); text-transform: uppercase; font-size: 12px; font-weight: 650; letter-spacing: 1.7px; }
+    .hero { padding-top: 66px; text-align: center; }
+    .hero h1 { max-width: 1050px; margin: 14px auto 0; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.25; font-weight: 600; letter-spacing: -.8px; }
+    .authors { max-width: 960px; margin: 24px auto 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 19px; font-size: 15px; color: #526274; }
+    .authors span { white-space: nowrap; }
+    .authors .first-author { color: var(--blue); font-weight: 550; }
+    .hero-summary { max-width: 760px; margin: 24px auto 0; color: var(--muted); font-size: 18px; line-height: 1.7; }
+    .actions { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px; margin-top: 28px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 46px; padding: 10px 20px; border-radius: 9px; border: 1px solid var(--line); background: var(--surface); font-size: 15px; font-weight: 550; transition: background .15s, border-color .15s; }
+    .button:hover:not(:disabled) { border-color: #b9c7dd; background: #f3f6fb; }
+    .button.primary { background: var(--blue); border-color: var(--blue); color: #fff; }
+    .button.primary:hover { background: #204dbb; border-color: #204dbb; }
+    .button:disabled { color: #758292; background: #f3f5f5; }
+    .media-slot { position: relative; display: flex; align-items: center; justify-content: center; min-width: 0; overflow: hidden; background-color: var(--stage); background-image: linear-gradient(rgba(155, 178, 205, .045) 1px, transparent 1px), linear-gradient(90deg, rgba(155, 178, 205, .045) 1px, transparent 1px); background-size: 36px 36px; color: var(--stage-text); aspect-ratio: 2 / 1; }
+    .slot-label { position: absolute; top: 17px; left: 20px; font-size: 12px; color: #d0dbe9; }
+    .slot-label.ours { display: flex; align-items: center; gap: 7px; color: #c4d5ff; }
+    .ours-dot { width: 5px; height: 5px; background: #91adff; border-radius: 100%; }
+    .slot-corners { width: min(63%, 305px); aspect-ratio: 2 / 1; position: relative; display: flex; align-items: center; justify-content: center; }
+    .slot-corners::before, .slot-corners::after { content: ""; position: absolute; width: 19px; height: 19px; border-color: #50667e; border-style: solid; }
+    .slot-corners::before { top: 0; left: 0; border-width: 1px 0 0 1px; }
+    .slot-corners::after { bottom: 0; right: 0; border-width: 0 1px 1px 0; }
+    .slot-center { text-align: center; color: var(--stage-muted); }
+    .slot-center .icon { display: block; width: 27px; height: 27px; margin: 0 auto 9px; color: #9bb0c8; stroke-width: 1.2; }
+    .slot-center span { font-size: 11px; letter-spacing: .15px; }
+    .sync-player { position: relative; min-width: 0; container-type: inline-size; background: var(--stage); color: var(--stage-text); text-align: left; }
+    .sync-player video { display: block; width: 100%; aspect-ratio: 16 / 9; background: var(--stage); }
+    .scene-view-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: #324151; }
+    .scene-view { min-width: 0; }
+    .view-name { min-height: 26px; padding: 3px 10px; color: #e7edf5; background: var(--stage); font-size: 15px; font-weight: 600; line-height: 20px; }
+    .scene-view:last-child .view-name { color: #b7ccff; }
+    .scene-view canvas { display: block; width: 100%; height: auto; aspect-ratio: 2 / 1; background: var(--stage); }
+    .player-controls { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "transport seek fullscreen" "speed speed speed"; align-items: center; gap: 3px 10px; padding: 7px 10px; border-top: 1px solid #324151; }
+    .player-transport { grid-area: transport; display: flex; align-items: center; gap: 3px; }
+    .player-button { display: inline-flex; align-items: center; justify-content: center; min-width: 30px; height: 30px; padding: 3px 5px; border: 1px solid #3f5065; border-radius: 6px; background: #1e3044; color: #e7edf5; font-size: 14px; line-height: 1; }
+    .player-button:hover { background: #2a405b; border-color: #718db1; }
+    .player-button .icon { width: 16px; height: 16px; }
+    .player-button:disabled { opacity: .4; }
+    .player-play { background: #2c4b79; border-color: #526d96; }
+    .player-play [data-play-label] { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+    .player-controls > [data-fullscreen] { grid-area: fullscreen; }
+    .player-seek { grid-area: seek; display: block; width: 100%; min-width: 0; height: 24px; margin: 0; accent-color: #8dadff; cursor: pointer; }
+    .player-speed { grid-area: speed; display: grid; grid-template-columns: minmax(0, 1fr) 80px; align-items: center; gap: 8px; min-width: 0; }
+    .player-speed input { display: block; width: 100%; min-width: 0; height: 24px; margin: 0; accent-color: #8dadff; cursor: pointer; }
+    .player-speed output { font-size: 12px; color: #c4d5ff; text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .player-status { grid-column: 1 / -1; margin: 2px 0 0; font-size: 12px; color: #d5c5a0; }
+    @container (min-width: 540px) {
+      .player-controls { grid-template-columns: auto minmax(70px, 1fr) minmax(155px, .75fr) auto; grid-template-areas: "transport seek speed fullscreen"; column-gap: 12px; }
+    }
+    .sync-player:fullscreen { display: flex; flex-direction: column; justify-content: center; width: 100%; height: 100%; }
+    .sync-player:fullscreen video { flex: 1; min-height: 0; height: 0; object-fit: contain; }
+    .sync-player:fullscreen .player-controls { flex: 0 0 auto; width: min(100%, 1280px); margin-inline: auto; }
+    .quad-player > video, .quad-player:fullscreen > video { position: absolute; top: 0; left: 0; width: 1px; height: 1px; min-height: 0; aspect-ratio: auto; opacity: .001; pointer-events: none; }
+    .quad-player:fullscreen .scene-view-grid { flex: 0 0 auto; width: min(100%, calc((100dvh - 144px) * 2)); margin-inline: auto; }
+    .section { padding-top: 94px; }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 40px; margin-bottom: 32px; }
+    .overview-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; padding: 0 0 6px; }
+    .overview-description { width: 100%; color: var(--muted); font-size: 17px; line-height: 1.8; }
+    .contribution-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px; }
+    .contribution { display: flex; gap: 14px; align-items: start; }
+    .contribution-number { color: var(--blue); font-size: 14px; line-height: 26px; font-variant-numeric: tabular-nums; }
+    .contribution strong { font-size: 17px; font-weight: 600; }
+    .contribution p { font-size: 15px; color: var(--muted); margin-top: 4px; line-height: 1.7; }
+    .method-diagram { min-width: 0; width: 100%; }
+    .method-diagram img { display: block; width: 100%; height: auto; }
+    .method-diagram svg.framework-svg { display: block; width: 100%; height: auto; overflow: visible; }
+    .method-diagram .framework-inline > img { display: none; }
+    .framework-panels > picture { display: block; min-width: 0; }
+    .framework-wide { display: block; }
+    .framework-panels { display: none; }
+    .gallery-section { margin-top: 88px; padding: 67px 0 70px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: #f3f6f6; }
+    .scene-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px; }
+    .scene-card { display: flex; flex-direction: column; min-width: 0; background: var(--surface); border: 1px solid #dee5e9; border-radius: 12px; overflow: hidden; transition: border-color .15s, box-shadow .15s; }
+    .scene-card:hover { border-color: #bacbdc; box-shadow: 0 5px 18px rgba(25, 43, 64, .045); }
+    .scene-media { aspect-ratio: 2 / 1; }
+    .scene-media .slot-label { top: 13px; left: 15px; color: #acbbce; font-size: 10px; }
+    .scene-media .slot-center .icon { width: 24px; height: 24px; margin-bottom: 7px; }
+    .scene-media .slot-center span { font-size: 10px; }
+    .scene-bottom { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px; }
+    .scene-bottom h3 { min-width: 0; }
+    .scene-bottom .scene-tags { flex-shrink: 0; max-width: 60%; margin: 0; justify-content: flex-end; }
+    .scene-tags { display: flex; flex-wrap: wrap; gap: 7px; margin: 14px 0 0; padding: 0; list-style: none; }
+    .scene-tag { color: #3c5f9f; background: #f0f4fd; padding: 2px 8px; border-radius: 20px; font-size: 12px; white-space: nowrap; }
+    .scene-tag.frame-rate { color: #46586c; background: #edf1f5; font-variant-numeric: tabular-nums; }
+    .scene-card h3 { font-size: 22px; line-height: 1.3; }
+    .scene-context { display: inline-block; font-size: 14px; font-weight: 400; color: var(--muted); }
+    .task-picker { display: flex; gap: 3px; padding: 3px; background: #edf1f5; border-radius: 8px; margin-left: auto; }
+    .task-button { padding: 7px 13px; min-height: 36px; background: transparent; border: 0; color: var(--muted); border-radius: 6px; font-size: 14px; }
+    .task-button[aria-pressed="true"] { color: var(--ink); background: #fff; box-shadow: 0 1px 3px rgba(25, 43, 64, .08); }
+    .comparison-list { display: grid; gap: 32px; margin-top: 24px; }
+    .comparison-scene { min-width: 0; border: 1px solid var(--line); border-radius: 15px; overflow: hidden; background: var(--surface); }
+    .comparison-scene-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 16px; }
+    .comparison-scene-heading h3 { min-width: 0; font-size: 22px; line-height: 1.3; }
+    .comparison-scene-heading .scene-tags { margin: 0; justify-content: flex-end; }
+    .comparison-player { position: relative; }
+    .comparison-player video, .comparison-player:fullscreen video { position: absolute; top: 0; left: 0; width: 1px; height: 1px; min-height: 0; aspect-ratio: auto; opacity: .001; pointer-events: none; }
+    .comparison-method-grid { --method-count: 5; display: grid; grid-template-columns: repeat(var(--method-count), minmax(0, 1fr)); gap: 1px; background: #dce3eb; }
+    .comparison-method { display: flex; flex-direction: column; min-width: 0; margin: 0; background: var(--stage); }
+    .method-name { display: flex; flex: 1; flex-direction: column; align-items: start; justify-content: center; gap: 2px; min-height: 52px; padding: 6px 12px; font-size: 16px; font-weight: 600; line-height: 1.25; overflow-wrap: anywhere; }
+    .method-name .method-kind { font-size: 13px; font-weight: 450; color: var(--muted); }
+    .method-name { color: var(--ink); background: #fff; }
+    .comparison-method.ours .method-name { color: var(--blue); background: #f0f4ff; }
+    .comparison-method img, .comparison-method canvas { display: block; width: 100%; height: auto; aspect-ratio: 2 / 1; object-fit: contain; background: var(--stage); }
+    .comparison-player:fullscreen .comparison-method-grid { width: min(100%, 1920px); }
+    .comparison-endpoint-grid { --method-count: 6; }
+    .comparison-reserved { padding: 24px; border-style: dashed; background: #f8fafb; }
+    .comparison-reserved h3 { margin-top: 7px; font-size: 18px; color: #607083; }
+    .comparison-reserved p { margin-top: 5px; font-size: 12px; color: var(--muted); }
+    .resources-section { padding-bottom: 74px; }
+    .resources-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+    .resource { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 14px 16px; padding: 28px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
+    .resource > .icon { width: 26px; height: 26px; color: #4d6689; }
+    .resource h3 { font-size: 22px; }
+    .resource .button { grid-column: 2; justify-self: start; min-height: 42px; padding: 8px 14px; font-size: 14px; }
+    .citation { margin-top: 25px; padding: 20px 24px; border: 1px solid var(--line); border-radius: 10px; background: #f4f6f7; display: flex; gap: 24px; align-items: baseline; }
+    .citation strong { font-size: 15px; font-weight: 550; }
+    .citation p { color: var(--muted); font-size: 14px; }
+    footer { border-top: 1px solid var(--line); padding: 24px 0; }
+    .footer-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
+    .footer-brand { color: #536477; font-size: 14px; font-weight: 550; }
+    .footer-note { color: var(--muted); font-size: 13px; }
+    noscript { display: block; text-align: center; padding: 14px; font-size: 15px; color: var(--muted); }
+    @media (min-width: 1600px) { .hero { padding-top: 78px; } }
+    @media (max-width: 1100px) {
+      .comparison-method-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .framework-wide { display: none !important; }
+      .framework-panels { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 18px; }
+    }
+    @media (max-width: 1000px) {
+      .scene-grid { grid-template-columns: 1fr; }
+      .overview-layout { grid-template-columns: 1fr; gap: 36px; }
+      .section-heading { flex-wrap: wrap; gap: 20px; }
+      .task-picker { margin-left: 0; }
+    }
+    @media (max-width: 760px) {
+      html { scroll-padding-top: 78px; }
+      .container { width: calc(100% - 32px); }
+      .topbar-inner { min-height: 62px; gap: 12px; }
+      .nav { gap: 18px; font-size: 14px; }
+      .nav-extra { display: none; }
+      .hero { padding-top: 43px; }
+      .hero .eyebrow { font-size: 11px; letter-spacing: 1.2px; }
+      .authors { margin-top: 22px; gap: 6px 15px; font-size: 14px; }
+      .hero-summary { font-size: 17px; max-width: 530px; }
+      .slot-label { top: 12px; left: 13px; font-size: 10px; }
+      .slot-corners { width: 72%; }
+      .slot-center span { font-size: 10px; }
+      .slot-center .icon { width: 23px; height: 23px; }
+      .section { padding-top: 65px; }
+      .overview-layout { grid-template-columns: 1fr; gap: 30px; }
+      .contribution-list { grid-template-columns: 1fr; gap: 18px; }
+      .framework-panels { grid-template-columns: minmax(0, 1fr); max-width: 560px; margin-inline: auto; gap: 16px; }
+      .gallery-section { margin-top: 62px; padding-block: 49px; }
+      .section-heading { flex-direction: column; align-items: start; gap: 15px; }
+      .scene-grid { grid-template-columns: 1fr; gap: 16px; }
+      .scene-bottom { gap: 8px; padding: 10px 12px; }
+      .scene-card h3 { font-size: 20px; }
+      .scene-tags { gap: 5px; }
+      .scene-tag { padding-inline: 6px; }
+      .comparison-scene-heading { gap: 8px; padding: 10px 12px; }
+      .comparison-scene-heading h3 { font-size: 20px; }
+      .comparison-scene-heading .scene-tags { flex-shrink: 0; max-width: 60%; }
+      .method-name { padding: 6px 10px; }
+      .comparison-method-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .resources-grid { grid-template-columns: 1fr; gap: 13px; }
+      .resource { padding: 22px; }
+      .citation { flex-direction: column; gap: 6px; }
+      .resources-section { padding-bottom: 50px; }
+    }
+    @media (max-width: 480px) {
+      .brand { font-size: 19px; gap: 7px; }
+      .brand-mark { width: 23px; height: 23px; }
+      .nav { gap: 12px; font-size: 13px; }
+      .scene-grid { grid-template-columns: 1fr; }
+      .scene-media { aspect-ratio: 2 / 1; }
+      .task-picker { width: 100%; }
+      .task-button { flex: 1; }
+    }
+    @media (max-width: 359px) {
+      .brand { font-size: 18px; }
+      .nav { gap: 9px; }
+      .task-button { padding-inline: 10px; font-size: 13px; }
+      .method-name { padding-inline: 10px; }
+    }
+    @media (pointer: coarse) {
+      .player-button { min-width: 32px; height: 32px; }
+      .player-speed input, .player-seek { height: 26px; }
+      select { font-size: 16px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Standalone static page. Selected media and its provenance are stored locally. -->
+  <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
+    <defs>
+      <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+      <symbol id="icon-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9" r="1.5"/><path d="m3 17 5-5 4 4 3-3 6 6"/></symbol>
+      <symbol id="icon-paper" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"/><path d="M14 3v6h6M8 13h8M8 17h6"/></symbol>
+      <symbol id="icon-code" viewBox="0 0 24 24"><path d="m8 7-5 5 5 5m8-10 5 5-5 5m-3-13-2 16"/></symbol>
+      <symbol id="icon-expand" viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></symbol>
+      <symbol id="icon-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+    </defs>
+  </svg>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="#main" aria-label="CoGenRec home"><span class="brand-mark" aria-hidden="true"></span>CoGenRec</a>
+      <nav class="nav" aria-label="Main navigation">
+        <a class="nav-extra" href="#overview">Overview</a>
+        <a href="#results">Results</a>
+        <a href="#comparisons">Comparisons</a>
+        <a class="nav-extra" href="#resources">Resources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="container hero" aria-labelledby="project-title">
+      <p class="eyebrow">Complementary vision · Generative reconstruction</p>
+      <h1 id="project-title">CoGenRec: A Unified Generative Framework for Complementary Vision Reconstruction</h1>
+      <div class="authors" aria-label="Authors">
+        <span class="first-author">Yapeng Meng</span><span>Xiangru Chen</span><span>Yuguo Chen</span><span>Shaojun Xu</span><span>Xuezhen Wang</span><span>Lijian Wang</span><span>Zheyu Yang</span><span>Yihan Lin</span><span>Luping Shi</span><span>Rong Zhao</span>
+      </div>
+      <p class="hero-summary">Reconstructing sharp, high-frame-rate HDR video<br>from complementary RGB and spatio-temporal measurements.</p>
+      <div class="actions">
+        <a class="button primary" href="#results">Explore results<svg class="icon" aria-hidden="true"><use href="#icon-arrow"/></svg></a>
+        <button class="button" type="button" disabled title="The paper link will be added to the final page."><svg class="icon" aria-hidden="true"><use href="#icon-paper"/></svg>Paper</button>
+        <button class="button" type="button" disabled title="The code link will be added to the final page."><svg class="icon" aria-hidden="true"><use href="#icon-code"/></svg>Code</button>
+      </div>
+    </section>
+
+    <section class="container section" id="overview" aria-labelledby="overview-title">
+      <div class="overview-layout">
+        <h2 id="overview-title">Overview</h2>
+        <figure class="method-diagram" aria-label="CoGenRec framework: dual-pathway CVS measurements, generative reconstruction, exposure-aware endpoint encoding and bidirectional temporal propagation.">
+          <picture class="framework-wide">
+            <source media="(prefers-reduced-motion: reduce)" srcset="assets/framework/cogenrec-framework-static.svg?v=660b6ce4bebc">
+            <img src="assets/framework/cogenrec-framework.svg?v=01fc0cabf5a1" width="1700" height="750" alt="CoGenRec architecture. COP RGB exposure centers align with intra-exposure SD and inter-exposure sampling instants; TD spans adjacent times. Multi-scale temporal features guide ControlNet, the diffusion backbone and detail-preserving VAE decoding." loading="lazy" decoding="async">
+          </picture>
+          <div class="framework-panels">
+            <picture>
+              <source media="(prefers-reduced-motion: reduce)" srcset="assets/framework/measurements-static.svg?v=bb5b27bb1800">
+              <img src="assets/framework/measurements.svg?v=c7caf47aca47" width="680" height="750" alt="COP RGB exposure centers align with intra-exposure SD and inter-exposure sampling instants; TD spans adjacent times. TD and SD are horizontally mirrored; middle times are omitted for readability." loading="lazy" decoding="async">
+            </picture>
+            <picture>
+              <source media="(prefers-reduced-motion: reduce)" srcset="assets/framework/reconstruction-mobile-static.svg?v=86ea3ca8d30e">
+              <img src="assets/framework/reconstruction-mobile.svg?v=b0017eca5955" width="560" height="810" alt="CoGenRec reconstruction: endpoint encoders and bidirectional temporal propagation supply multi-scale guidance to ControlNet and detail fusion; the diffusion backbone and VAE decoder output RGB video." loading="lazy" decoding="async">
+            </picture>
+            <picture>
+              <source media="(prefers-reduced-motion: reduce)" srcset="assets/framework/endpoint-encoder-static.svg?v=081b08322694">
+              <img src="assets/framework/endpoint-encoder.svg?v=ba1aed189447" width="480" height="320" alt="Exposure-aware endpoint encoder: cross-attention fuses the TD and SD branches into hierarchical RGB features at four scales." loading="lazy" decoding="async">
+            </picture>
+            <picture>
+              <source media="(prefers-reduced-motion: reduce)" srcset="assets/framework/temporal-propagator-static.svg?v=745a5e8cac17">
+              <img src="assets/framework/temporal-propagator.svg?v=d913dd5921d1" width="500" height="320" alt="Bidirectional recurrent temporal propagator: inter-exposure TD and SD update forward and backward streams anchored at the two RGB endpoints." loading="lazy" decoding="async">
+            </picture>
+          </div>
+        </figure>
+        <p class="overview-description">The complementary vision sensor captures spatially dense RGB frames alongside high-speed spatial and temporal difference signals. CoGenRec combines these measurements with a video generative prior to jointly address motion blur, temporal undersampling, and exposure clipping.</p>
+        <div class="contribution-list">
+          <div class="contribution"><span class="contribution-number">01</span><div><strong>Restore sharp structures</strong><p>Use intra-exposure cues to recover motion-blurred RGB frames.</p></div></div>
+          <div class="contribution"><span class="contribution-number">02</span><div><strong>Recover motion between frames</strong><p>Use inter-exposure measurements for high-frame-rate reconstruction.</p></div></div>
+          <div class="contribution"><span class="contribution-number">03</span><div><strong>Fuse complementary exposure information</strong><p>Combine the two sensing pathways for HDR reconstruction.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery-section" id="results" aria-labelledby="results-title">
+      <div class="container">
+        <div class="section-heading"><h2 id="results-title">Real-world results.</h2></div>
+        <!-- Each scene has its frame rate and any applicable Fast motion / HDR / Blur tags. -->
+        <div class="scene-grid">
+          <article class="scene-card" data-scene="fast">
+            <div class="sync-player" data-view-layout="quad" data-source-fps="757" data-encoded-fps="60" data-frame-count="125" data-ratio="25" data-first-cop="66">
+              <video autoplay controls muted loop playsinline preload="none" poster="assets/cup-shattering-cop66-70/poster.jpg" aria-label="Shattering glass">
+                <source src="assets/cup-shattering-cop66-70/comparison.mp4" type="video/mp4; codecs=avc1.640020">
+                <source src="assets/cup-shattering-cop66-70/comparison.webm" type="video/webm; codecs=vp9">
+                Your browser does not support embedded video.
+              </video>
+            </div>
+            <div class="scene-bottom">
+              <h3>Shattering glass</h3>
+              <ul class="scene-tags" aria-label="Scene tags"><li class="scene-tag frame-rate">757 FPS</li><li class="scene-tag">Fast motion</li><li class="scene-tag">Blur</li></ul>
+            </div>
+          </article>
+          <article class="scene-card" data-scene="fireworks">
+            <div class="sync-player" data-view-layout="quad" data-source-fps="757" data-encoded-fps="60" data-frame-count="76" data-ratio="25" data-first-cop="455" data-boundary-policy="previous-endpoint">
+              <video autoplay controls muted loop playsinline preload="none" poster="assets/fireworks-cop455-457/poster.jpg" aria-label="Ground fireworks">
+                <source src="assets/fireworks-cop455-457/comparison.mp4" type="video/mp4; codecs=avc1.640020">
+                <source src="assets/fireworks-cop455-457/comparison.webm" type="video/webm; codecs=vp9">
+                Your browser does not support embedded video.
+              </video>
+            </div>
+            <div class="scene-bottom">
+              <h3>Ground fireworks</h3>
+              <ul class="scene-tags" aria-label="Scene tags"><li class="scene-tag frame-rate">757 FPS</li><li class="scene-tag">Fast motion</li><li class="scene-tag">HDR</li><li class="scene-tag">Blur</li></ul>
+            </div>
+          </article>
+          <article class="scene-card" data-scene="balloon">
+            <div class="sync-player" data-view-layout="quad" data-source-fps="3000" data-encoded-fps="60" data-frame-count="21" data-ratio="100" data-first-cop="54" data-first-aop="80" data-boundary-policy="previous-endpoint" data-slowdown-factors="1,2,4,8,16,32,64,128" data-preview-factors="1,2,4,8,16" data-default-slowdown="128">
+              <video autoplay controls muted loop playsinline preload="none" poster="assets/balloon-cop54-aop80-100/poster.jpg" aria-label="Balloon burst">
+                <source src="assets/balloon-cop54-aop80-100/comparison.mp4" type="video/mp4; codecs=avc1.640020">
+                <source src="assets/balloon-cop54-aop80-100/comparison.webm" type="video/webm; codecs=vp9">
+                Your browser does not support embedded video.
+              </video>
+            </div>
+            <div class="scene-bottom">
+              <h3>Balloon burst</h3>
+              <ul class="scene-tags" aria-label="Scene tags"><li class="scene-tag frame-rate">3000 FPS</li><li class="scene-tag">Fast motion</li></ul>
+            </div>
+          </article>
+          <article class="scene-card" data-scene="railway">
+            <div class="sync-player" data-view-layout="quad" data-source-fps="1515" data-encoded-fps="60" data-frame-count="116" data-ratio="50" data-first-cop="79" data-first-aop="10" data-boundary-policy="previous-endpoint" data-preview-factors="1,2,4">
+              <video autoplay controls muted loop playsinline preload="none" poster="assets/railway-cop79-aop10-cop81-aop25/poster.jpg" aria-label="Train encounter">
+                <source src="assets/railway-cop79-aop10-cop81-aop25/comparison.mp4" type="video/mp4; codecs=avc1.640020">
+                <source src="assets/railway-cop79-aop10-cop81-aop25/comparison.webm" type="video/webm; codecs=vp9">
+                Your browser does not support embedded video.
+              </video>
+            </div>
+            <div class="scene-bottom">
+              <h3>Train encounter <span class="scene-context">(600 km/h relative speed)</span></h3>
+              <ul class="scene-tags" aria-label="Scene tags"><li class="scene-tag frame-rate">1515 FPS</li><li class="scene-tag">Fast motion</li><li class="scene-tag">HDR</li><li class="scene-tag">Blur</li></ul>
+            </div>
+          </article>
+          <article class="scene-card" data-scene="peach">
+            <div class="sync-player" data-view-layout="quad" data-clock="media-time" data-source-fps="757" data-encoded-fps="60" data-frame-count="21" data-ratio="25" data-first-cop="26" data-sample-ticks="0,4,8,12,16,20,24,25,29,33,37,41,45,49,50,54,58,62,66,70,74" data-duration-ticks="75">
+              <video autoplay controls muted loop playsinline preload="none" poster="assets/peach-blossoms-cop26-28/poster.jpg" aria-label="Peach blossoms">
+                <source src="assets/peach-blossoms-cop26-28/comparison.mp4" type="video/mp4; codecs=avc1.640020">
+                <source src="assets/peach-blossoms-cop26-28/comparison.webm" type="video/webm; codecs=vp9">
+                Your browser does not support embedded video.
+              </video>
+            </div>
+            <div class="scene-bottom">
+              <h3>Peach blossoms</h3>
+              <ul class="scene-tags" aria-label="Scene tags"><li class="scene-tag frame-rate">757 FPS</li><li class="scene-tag">Fast motion</li><li class="scene-tag">Blur</li></ul>
+            </div>
+          </article>
+          <article class="scene-card" data-scene="bicycles">
+            <div class="sync-player" data-view-layout="quad" data-clock="media-time" data-source-fps="757" data-encoded-fps="60" data-frame-count="21" data-ratio="25" data-first-cop="98" data-sample-ticks="0,4,8,12,16,20,24,25,29,33,37,41,45,49,50,54,58,62,66,70,74" data-duration-ticks="75">
+              <video autoplay controls muted loop playsinline preload="none" poster="assets/street-bicycles-cop98-100/poster.jpg" aria-label="Street bicycles">
+                <source src="assets/street-bicycles-cop98-100/comparison.mp4" type="video/mp4; codecs=avc1.640020">
+                <source src="assets/street-bicycles-cop98-100/comparison.webm" type="video/webm; codecs=vp9">
+                Your browser does not support embedded video.
+              </video>
+            </div>
+            <div class="scene-bottom">
+              <h3>Street bicycles</h3>
+              <ul class="scene-tags" aria-label="Scene tags"><li class="scene-tag frame-rate">757 FPS</li><li class="scene-tag">Fast motion</li><li class="scene-tag">Blur</li></ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="container section" id="comparisons" aria-labelledby="comparisons-title">
+      <div class="section-heading">
+        <h2 id="comparisons-title">Method comparisons</h2>
+        <div class="task-picker" role="group" aria-label="Comparison task"><button class="task-button" type="button" data-task="video" aria-pressed="true">Video reconstruction</button><button class="task-button" type="button" data-task="deblur" aria-pressed="false">RGB deblurring</button></div>
+      </div>
+      <div class="comparison-list">
+        <article class="comparison-scene" data-comparison-scene="turntable" id="comparison-turntable">
+          <header class="comparison-scene-heading">
+            <h3>Spinning disc</h3>
+            <ul class="scene-tags" aria-label="Scene tags"><li class="scene-tag frame-rate">757 FPS</li><li class="scene-tag">Fast motion</li><li class="scene-tag">Blur</li></ul>
+          </header>
+          <div data-comparison-panel="video">
+            <div class="sync-player comparison-player" data-clock="media-time" data-source-fps="757" data-encoded-fps="60" data-frame-count="14" data-ratio="25" data-first-cop="2" data-sample-ticks="0,4,8,12,16,20,24,25,29,33,37,41,45,49" data-duration-ticks="50">
+              <video autoplay muted loop playsinline preload="none" aria-hidden="true" tabindex="-1">
+                <source src="assets/comparisons/hw-turntable-cop2-3/comparison.mp4" type="video/mp4; codecs=avc1.640028">
+                <source src="assets/comparisons/hw-turntable-cop2-3/comparison.webm" type="video/webm; codecs=vp9">
+              </video>
+              <div class="comparison-method-grid">
+                <figure class="comparison-method">
+                  <figcaption class="method-name">Input RGB</figcaption>
+                  <img class="method-poster" src="assets/comparisons/hw-turntable-cop2-3/poster-input.jpg" alt="Input RGB comparison preview" width="640" height="320" loading="lazy">
+                  <canvas data-method-tile="0" width="640" height="320" role="img" aria-label="Input RGB" hidden></canvas>
+                </figure>
+                <figure class="comparison-method">
+                  <figcaption class="method-name">Tianmouc-UNet<span class="method-kind">Official weights</span></figcaption>
+                  <img class="method-poster" src="assets/comparisons/hw-turntable-cop2-3/poster-unet.jpg" alt="Tianmouc-UNet comparison preview" width="640" height="320" loading="lazy">
+                  <canvas data-method-tile="1" width="640" height="320" role="img" aria-label="Tianmouc-UNet" hidden></canvas>
+                </figure>
+                <figure class="comparison-method">
+                  <figcaption class="method-name">IGFNet<span class="method-kind">Official weights</span></figcaption>
+                  <img class="method-poster" src="assets/comparisons/hw-turntable-cop2-3/poster-igfnet.jpg" alt="IGFNet comparison preview" width="640" height="320" loading="lazy">
+                  <canvas data-method-tile="2" width="640" height="320" role="img" aria-label="IGFNet" hidden></canvas>
+                </figure>
+                <figure class="comparison-method">
+                  <figcaption class="method-name">CBRDM<span class="method-kind">Official weights</span></figcaption>
+                  <img class="method-poster" src="assets/comparisons/hw-turntable-cop2-3/poster-cbrdm.jpg" alt="CBRDM comparison preview" width="640" height="320" loading="lazy">
+                  <canvas data-method-tile="3" width="640" height="320" role="img" aria-label="CBRDM" hidden></canvas>
+                </figure>
+                <figure class="comparison-method ours">
+                  <figcaption class="method-name">CoGenRec</figcaption>
+                  <img class="method-poster" src="assets/comparisons/hw-turntable-cop2-3/poster-ours.jpg" alt="CoGenRec comparison preview" width="640" height="320" loading="lazy">
+                  <canvas data-method-tile="4" width="640" height="320" role="img" aria-label="CoGenRec" hidden></canvas>
+                </figure>
+              </div>
+            </div>
+          </div>
+          <div class="comparison-endpoint-panel" data-comparison-panel="deblur" hidden>
+            <div class="comparison-method-grid comparison-endpoint-grid">
+                <figure class="comparison-method">
+                  <figcaption class="method-name">Input RGB</figcaption>
+                  <img src="assets/comparisons/hw-turntable-cop2-3/endpoint-cop2-input.png" alt="Input RGB" width="640" height="320" loading="lazy" decoding="async">
+                </figure>
+                <figure class="comparison-method">
+                  <figcaption class="method-name">Tianmouc-UNet<span class="method-kind">Official weights</span></figcaption>
+                  <img src="assets/comparisons/hw-turntable-cop2-3/endpoint-cop2-unet.png" alt="Tianmouc-UNet" width="640" height="320" loading="lazy" decoding="async">
+                </figure>
+                <figure class="comparison-method">
+                  <figcaption class="method-name">IGFNet<span class="method-kind">Official weights</span></figcaption>
+                  <img src="assets/comparisons/hw-turntable-cop2-3/endpoint-cop2-igfnet.png" alt="IGFNet" width="640" height="320" loading="lazy" decoding="async">
+                </figure>
+                <figure class="comparison-method">
+                  <figcaption class="method-name">CBRDM<span class="method-kind">Official weights</span></figcaption>
+                  <img src="assets/comparisons/hw-turntable-cop2-3/endpoint-cop2-cbrdm.png" alt="CBRDM" width="640" height="320" loading="lazy" decoding="async">
+                </figure>
+                <figure class="comparison-method">
+                  <figcaption class="method-name">STGDNet<span class="method-kind">Official weights</span></figcaption>
+                  <img src="assets/comparisons/hw-turntable-cop2-3/endpoint-cop2-stgdnet.png" alt="STGDNet" width="640" height="320" loading="lazy" decoding="async">
+                </figure>
+                <figure class="comparison-method ours">
+                  <figcaption class="method-name">CoGenRec</figcaption>
+                  <img src="assets/comparisons/hw-turntable-cop2-3/endpoint-cop2-ours.png" alt="CoGenRec" width="640" height="320" loading="lazy" decoding="async">
+                </figure>
+            </div>
+          </div>
+        </article>
+        <article class="comparison-scene" data-comparison-scene="blocks" id="comparison-blocks">
+          <header class="comparison-scene-heading">
+            <h3>Rotating blocks</h3>
+            <ul class="scene-tags" aria-label="Scene tags"><li class="scene-tag frame-rate">757 FPS</li><li class="scene-tag">Fast motion</li><li class="scene-tag">Blur</li></ul>
+          </header>
+          <div data-comparison-panel="video">
+            <div class="sync-player comparison-player" data-clock="media-time" data-source-fps="757" data-encoded-fps="60" data-frame-count="14" data-ratio="25" data-first-cop="40" data-sample-ticks="0,4,8,12,16,20,24,25,29,33,37,41,45,49" data-duration-ticks="50">
+              <video autoplay muted loop playsinline preload="none" aria-hidden="true" tabindex="-1">
+                <source src="assets/comparisons/rotating-blocks-cop40-41/comparison.mp4" type="video/mp4; codecs=avc1.640028">
+                <source src="assets/comparisons/rotating-blocks-cop40-41/comparison.webm" type="video/webm; codecs=vp9">
+              </video>
+              <div class="comparison-method-grid">
+                <figure class="comparison-method">
+                  <figcaption class="method-name">Input RGB</figcaption>
+                  <img class="method-poster" src="assets/comparisons/rotating-blocks-cop40-41/poster-input.jpg" alt="Input RGB comparison preview" width="640" height="320" loading="lazy">
+                  <canvas data-method-tile="0" width="640" height="320" role="img" aria-label="Input RGB" hidden></canvas>
+                </figure>
+                <figure class="comparison-method">
+                  <figcaption class="method-name">Tianmouc-UNet<span class="method-kind">Official weights</span></figcaption>
+                  <img class="method-poster" src="assets/comparisons/rotating-blocks-cop40-41/poster-unet.jpg" alt="Tianmouc-UNet comparison preview" width="640" height="320" loading="lazy">
+                  <canvas data-method-tile="1" width="640" height="320" role="img" aria-label="Tianmouc-UNet" hidden></canvas>
+                </figure>
+                <figure class="comparison-method">
+                  <figcaption class="method-name">IGFNet<span class="method-kind">Official weights</span></figcaption>
+                  <img class="method-poster" src="assets/comparisons/rotating-blocks-cop40-41/poster-igfnet.jpg" alt="IGFNet comparison preview" width="640" height="320" loading="lazy">
+                  <canvas data-method-tile="2" width="640" height="320" role="img" aria-label="IGFNet" hidden></canvas>
+                </figure>
+                <figure class="comparison-method">
+                  <figcaption class="method-name">CBRDM<span class="method-kind">Official weights</span></figcaption>
+                  <img class="method-poster" src="assets/comparisons/rotating-blocks-cop40-41/poster-cbrdm.jpg" alt="CBRDM comparison preview" width="640" height="320" loading="lazy">
+                  <canvas data-method-tile="3" width="640" height="320" role="img" aria-label="CBRDM" hidden></canvas>
+                </figure>
+                <figure class="comparison-method ours">
+                  <figcaption class="method-name">CoGenRec</figcaption>
+                  <img class="method-poster" src="assets/comparisons/rotating-blocks-cop40-41/poster-ours.jpg" alt="CoGenRec comparison preview" width="640" height="320" loading="lazy">
+                  <canvas data-method-tile="4" width="640" height="320" role="img" aria-label="CoGenRec" hidden></canvas>
+                </figure>
+              </div>
+            </div>
+          </div>
+          <div class="comparison-endpoint-panel" data-comparison-panel="deblur" hidden>
+            <div class="comparison-method-grid comparison-endpoint-grid">
+                <figure class="comparison-method">
+                  <figcaption class="method-name">Input RGB</figcaption>
+                  <img src="assets/comparisons/rotating-blocks-cop40-41/endpoint-cop40-input.png" alt="Input RGB" width="640" height="320" loading="lazy" decoding="async">
+                </figure>
+                <figure class="comparison-method">
+                  <figcaption class="method-name">Tianmouc-UNet<span class="method-kind">Official weights</span></figcaption>
+                  <img src="assets/comparisons/rotating-blocks-cop40-41/endpoint-cop40-unet.png" alt="Tianmouc-UNet" width="640" height="320" loading="lazy" decoding="async">
+                </figure>
+                <figure class="comparison-method">
+                  <figcaption class="method-name">IGFNet<span class="method-kind">Official weights</span></figcaption>
+                  <img src="assets/comparisons/rotating-blocks-cop40-41/endpoint-cop40-igfnet.png" alt="IGFNet" width="640" height="320" loading="lazy" decoding="async">
+                </figure>
+                <figure class="comparison-method">
+                  <figcaption class="method-name">CBRDM<span class="method-kind">Official weights</span></figcaption>
+                  <img src="assets/comparisons/rotating-blocks-cop40-41/endpoint-cop40-cbrdm.png" alt="CBRDM" width="640" height="320" loading="lazy" decoding="async">
+                </figure>
+                <figure class="comparison-method">
+                  <figcaption class="method-name">STGDNet<span class="method-kind">Official weights</span></figcaption>
+                  <img src="assets/comparisons/rotating-blocks-cop40-41/endpoint-cop40-stgdnet.png" alt="STGDNet" width="640" height="320" loading="lazy" decoding="async">
+                </figure>
+                <figure class="comparison-method ours">
+                  <figcaption class="method-name">CoGenRec</figcaption>
+                  <img src="assets/comparisons/rotating-blocks-cop40-41/endpoint-cop40-ours.png" alt="CoGenRec" width="640" height="320" loading="lazy" decoding="async">
+                </figure>
+            </div>
+          </div>
+        </article>
+        <article class="comparison-scene" data-comparison-scene="hdr-cartoon" id="comparison-hdr-cartoon">
+          <header class="comparison-scene-heading">
+            <h3>Cartoon poster</h3>
+            <ul class="scene-tags" aria-label="Scene tags"><li class="scene-tag frame-rate">757 FPS</li><li class="scene-tag">HDR</li></ul>
+          </header>
+          <div data-comparison-panel="video">
+            <div class="sync-player comparison-player" data-clock="media-time" data-source-fps="757" data-encoded-fps="60" data-frame-count="7" data-ratio="25" data-first-cop="185" data-sample-ticks="0,4,8,12,16,20,24" data-duration-ticks="25">
+              <video autoplay muted loop playsinline preload="none" aria-hidden="true" tabindex="-1">
+                <source src="assets/comparisons/hdr-cartoon-cop185/comparison.mp4" type="video/mp4; codecs=avc1.640028">
+                <source src="assets/comparisons/hdr-cartoon-cop185/comparison.webm" type="video/webm; codecs=vp9">
+              </video>
+              <div class="comparison-method-grid">
+                <figure class="comparison-method">
+                  <figcaption class="method-name">Input RGB</figcaption>
+                  <img class="method-poster" src="assets/comparisons/hdr-cartoon-cop185/poster-input.jpg" alt="Input RGB comparison preview" width="640" height="320" loading="lazy">
+                  <canvas data-method-tile="0" width="640" height="320" role="img" aria-label="Input RGB" hidden></canvas>
+                </figure>
+                <figure class="comparison-method">
+                  <figcaption class="method-name">Tianmouc-UNet<span class="method-kind">Official weights</span></figcaption>
+                  <img class="method-poster" src="assets/comparisons/hdr-cartoon-cop185/poster-unet.jpg" alt="Tianmouc-UNet comparison preview" width="640" height="320" loading="lazy">
+                  <canvas data-method-tile="1" width="640" height="320" role="img" aria-label="Tianmouc-UNet" hidden></canvas>
+                </figure>
+                <figure class="comparison-method">
+                  <figcaption class="method-name">IGFNet<span class="method-kind">Official weights</span></figcaption>
+                  <img class="method-poster" src="assets/comparisons/hdr-cartoon-cop185/poster-igfnet.jpg" alt="IGFNet comparison preview" width="640" height="320" loading="lazy">
+                  <canvas data-method-tile="2" width="640" height="320" role="img" aria-label="IGFNet" hidden></canvas>
+                </figure>
+                <figure class="comparison-method">
+                  <figcaption class="method-name">CBRDM<span class="method-kind">Official weights</span></figcaption>
+                  <img class="method-poster" src="assets/comparisons/hdr-cartoon-cop185/poster-cbrdm.jpg" alt="CBRDM comparison preview" width="640" height="320" loading="lazy">
+                  <canvas data-method-tile="3" width="640" height="320" role="img" aria-label="CBRDM" hidden></canvas>
+                </figure>
+                <figure class="comparison-method ours">
+                  <figcaption class="method-name">CoGenRec</figcaption>
+                  <img class="method-poster" src="assets/comparisons/hdr-cartoon-cop185/poster-ours.jpg" alt="CoGenRec comparison preview" width="640" height="320" loading="lazy">
+                  <canvas data-method-tile="4" width="640" height="320" role="img" aria-label="CoGenRec" hidden></canvas>
+                </figure>
+              </div>
+            </div>
+          </div>
+          <div class="comparison-endpoint-panel" data-comparison-panel="deblur" hidden>
+            <div class="comparison-method-grid comparison-endpoint-grid">
+                <figure class="comparison-method">
+                  <figcaption class="method-name">Input RGB</figcaption>
+                  <img src="assets/comparisons/hdr-cartoon-cop185/endpoint-cop185-input.png" alt="Input RGB" width="640" height="320" loading="lazy" decoding="async">
+                </figure>
+                <figure class="comparison-method">
+                  <figcaption class="method-name">Tianmouc-UNet<span class="method-kind">Official weights</span></figcaption>
+                  <img src="assets/comparisons/hdr-cartoon-cop185/endpoint-cop185-unet.png" alt="Tianmouc-UNet" width="640" height="320" loading="lazy" decoding="async">
+                </figure>
+                <figure class="comparison-method">
+                  <figcaption class="method-name">IGFNet<span class="method-kind">Official weights</span></figcaption>
+                  <img src="assets/comparisons/hdr-cartoon-cop185/endpoint-cop185-igfnet.png" alt="IGFNet" width="640" height="320" loading="lazy" decoding="async">
+                </figure>
+                <figure class="comparison-method">
+                  <figcaption class="method-name">CBRDM<span class="method-kind">Official weights</span></figcaption>
+                  <img src="assets/comparisons/hdr-cartoon-cop185/endpoint-cop185-cbrdm.png" alt="CBRDM" width="640" height="320" loading="lazy" decoding="async">
+                </figure>
+                <figure class="comparison-method">
+                  <figcaption class="method-name">STGDNet<span class="method-kind">Official weights</span></figcaption>
+                  <img src="assets/comparisons/hdr-cartoon-cop185/endpoint-cop185-stgdnet.png" alt="STGDNet" width="640" height="320" loading="lazy" decoding="async">
+                </figure>
+                <figure class="comparison-method ours">
+                  <figcaption class="method-name">CoGenRec</figcaption>
+                  <img src="assets/comparisons/hdr-cartoon-cop185/endpoint-cop185-ours.png" alt="CoGenRec" width="640" height="320" loading="lazy" decoding="async">
+                </figure>
+            </div>
+          </div>
+        </article>
+        <article class="comparison-scene" data-comparison-scene="hdr-bank" id="comparison-hdr-bank">
+          <header class="comparison-scene-heading">
+            <h3>Sunlit facade</h3>
+            <ul class="scene-tags" aria-label="Scene tags"><li class="scene-tag frame-rate">757 FPS</li><li class="scene-tag">HDR</li></ul>
+          </header>
+          <div data-comparison-panel="video">
+            <div class="sync-player comparison-player" data-clock="media-time" data-source-fps="757" data-encoded-fps="60" data-frame-count="14" data-ratio="25" data-first-cop="186" data-sample-ticks="0,4,8,12,16,20,24,25,29,33,37,41,45,49" data-duration-ticks="50">
+              <video autoplay muted loop playsinline preload="none" aria-hidden="true" tabindex="-1">
+                <source src="assets/comparisons/hdr-bank-cop186-187/comparison.mp4" type="video/mp4; codecs=avc1.640028">
+                <source src="assets/comparisons/hdr-bank-cop186-187/comparison.webm" type="video/webm; codecs=vp9">
+              </video>
+              <div class="comparison-method-grid">
+                <figure class="comparison-method">
+                  <figcaption class="method-name">Input RGB</figcaption>
+                  <img class="method-poster" src="assets/comparisons/hdr-bank-cop186-187/poster-input.jpg" alt="Input RGB comparison preview" width="640" height="320" loading="lazy">
+                  <canvas data-method-tile="0" width="640" height="320" role="img" aria-label="Input RGB" hidden></canvas>
+                </figure>
+                <figure class="comparison-method">
+                  <figcaption class="method-name">Tianmouc-UNet<span class="method-kind">Official weights</span></figcaption>
+                  <img class="method-poster" src="assets/comparisons/hdr-bank-cop186-187/poster-unet.jpg" alt="Tianmouc-UNet comparison preview" width="640" height="320" loading="lazy">
+                  <canvas data-method-tile="1" width="640" height="320" role="img" aria-label="Tianmouc-UNet" hidden></canvas>
+                </figure>
+                <figure class="comparison-method">
+                  <figcaption class="method-name">IGFNet<span class="method-kind">Official weights</span></figcaption>
+                  <img class="method-poster" src="assets/comparisons/hdr-bank-cop186-187/poster-igfnet.jpg" alt="IGFNet comparison preview" width="640" height="320" loading="lazy">
+                  <canvas data-method-tile="2" width="640" height="320" role="img" aria-label="IGFNet" hidden></canvas>
+                </figure>
+                <figure class="comparison-method">
+                  <figcaption class="method-name">CBRDM<span class="method-kind">Official weights</span></figcaption>
+                  <img class="method-poster" src="assets/comparisons/hdr-bank-cop186-187/poster-cbrdm.jpg" alt="CBRDM comparison preview" width="640" height="320" loading="lazy">
+                  <canvas data-method-tile="3" width="640" height="320" role="img" aria-label="CBRDM" hidden></canvas>
+                </figure>
+                <figure class="comparison-method ours">
+                  <figcaption class="method-name">CoGenRec</figcaption>
+                  <img class="method-poster" src="assets/comparisons/hdr-bank-cop186-187/poster-ours.jpg" alt="CoGenRec comparison preview" width="640" height="320" loading="lazy">
+                  <canvas data-method-tile="4" width="640" height="320" role="img" aria-label="CoGenRec" hidden></canvas>
+                </figure>
+              </div>
+            </div>
+          </div>
+          <div class="comparison-endpoint-panel" data-comparison-panel="deblur" hidden>
+            <div class="comparison-method-grid comparison-endpoint-grid">
+                <figure class="comparison-method">
+                  <figcaption class="method-name">Input RGB</figcaption>
+                  <img src="assets/comparisons/hdr-bank-cop186-187/endpoint-cop186-input.png" alt="Input RGB" width="640" height="320" loading="lazy" decoding="async">
+                </figure>
+                <figure class="comparison-method">
+                  <figcaption class="method-name">Tianmouc-UNet<span class="method-kind">Official weights</span></figcaption>
+                  <img src="assets/comparisons/hdr-bank-cop186-187/endpoint-cop186-unet.png" alt="Tianmouc-UNet" width="640" height="320" loading="lazy" decoding="async">
+                </figure>
+                <figure class="comparison-method">
+                  <figcaption class="method-name">IGFNet<span class="method-kind">Official weights</span></figcaption>
+                  <img src="assets/comparisons/hdr-bank-cop186-187/endpoint-cop186-igfnet.png" alt="IGFNet" width="640" height="320" loading="lazy" decoding="async">
+                </figure>
+                <figure class="comparison-method">
+                  <figcaption class="method-name">CBRDM<span class="method-kind">Official weights</span></figcaption>
+                  <img src="assets/comparisons/hdr-bank-cop186-187/endpoint-cop186-cbrdm.png" alt="CBRDM" width="640" height="320" loading="lazy" decoding="async">
+                </figure>
+                <figure class="comparison-method">
+                  <figcaption class="method-name">STGDNet<span class="method-kind">Official weights</span></figcaption>
+                  <img src="assets/comparisons/hdr-bank-cop186-187/endpoint-cop186-stgdnet.png" alt="STGDNet" width="640" height="320" loading="lazy" decoding="async">
+                </figure>
+                <figure class="comparison-method ours">
+                  <figcaption class="method-name">CoGenRec</figcaption>
+                  <img src="assets/comparisons/hdr-bank-cop186-187/endpoint-cop186-ours.png" alt="CoGenRec" width="640" height="320" loading="lazy" decoding="async">
+                </figure>
+            </div>
+          </div>
+        </article>
+        <article class="comparison-scene" data-comparison-scene="motorcycle" id="comparison-motorcycle">
+          <header class="comparison-scene-heading">
+            <h3>Passing motorcycle</h3>
+            <ul class="scene-tags" aria-label="Scene tags"><li class="scene-tag frame-rate">757 FPS</li><li class="scene-tag">Fast motion</li><li class="scene-tag">Blur</li></ul>
+          </header>
+          <div data-comparison-panel="video">
+            <div class="sync-player comparison-player" data-clock="media-time" data-source-fps="757" data-encoded-fps="60" data-frame-count="21" data-ratio="25" data-first-cop="752" data-sample-ticks="0,4,8,12,16,20,24,25,29,33,37,41,45,49,50,54,58,62,66,70,74" data-duration-ticks="75">
+              <video autoplay muted loop playsinline preload="none" aria-hidden="true" tabindex="-1">
+                <source src="assets/comparisons/motorcycle-cop752-754/comparison.mp4" type="video/mp4; codecs=avc1.640028">
+                <source src="assets/comparisons/motorcycle-cop752-754/comparison.webm" type="video/webm; codecs=vp9">
+              </video>
+              <div class="comparison-method-grid">
+                <figure class="comparison-method">
+                  <figcaption class="method-name">Input RGB</figcaption>
+                  <img class="method-poster" src="assets/comparisons/motorcycle-cop752-754/poster-input.jpg" alt="Input RGB comparison preview" width="640" height="320" loading="lazy">
+                  <canvas data-method-tile="0" width="640" height="320" role="img" aria-label="Input RGB" hidden></canvas>
+                </figure>
+                <figure class="comparison-method">
+                  <figcaption class="method-name">Tianmouc-UNet<span class="method-kind">Official weights</span></figcaption>
+                  <img class="method-poster" src="assets/comparisons/motorcycle-cop752-754/poster-unet.jpg" alt="Tianmouc-UNet comparison preview" width="640" height="320" loading="lazy">
+                  <canvas data-method-tile="1" width="640" height="320" role="img" aria-label="Tianmouc-UNet" hidden></canvas>
+                </figure>
+                <figure class="comparison-method">
+                  <figcaption class="method-name">IGFNet<span class="method-kind">Official weights</span></figcaption>
+                  <img class="method-poster" src="assets/comparisons/motorcycle-cop752-754/poster-igfnet.jpg" alt="IGFNet comparison preview" width="640" height="320" loading="lazy">
+                  <canvas data-method-tile="2" width="640" height="320" role="img" aria-label="IGFNet" hidden></canvas>
+                </figure>
+                <figure class="comparison-method">
+                  <figcaption class="method-name">CBRDM<span class="method-kind">Official weights</span></figcaption>
+                  <img class="method-poster" src="assets/comparisons/motorcycle-cop752-754/poster-cbrdm.jpg" alt="CBRDM comparison preview" width="640" height="320" loading="lazy">
+                  <canvas data-method-tile="3" width="640" height="320" role="img" aria-label="CBRDM" hidden></canvas>
+                </figure>
+                <figure class="comparison-method ours">
+                  <figcaption class="method-name">CoGenRec</figcaption>
+                  <img class="method-poster" src="assets/comparisons/motorcycle-cop752-754/poster-ours.jpg" alt="CoGenRec comparison preview" width="640" height="320" loading="lazy">
+                  <canvas data-method-tile="4" width="640" height="320" role="img" aria-label="CoGenRec" hidden></canvas>
+                </figure>
+              </div>
+            </div>
+          </div>
+          <div class="comparison-endpoint-panel" data-comparison-panel="deblur" hidden>
+            <div class="comparison-method-grid comparison-endpoint-grid">
+                <figure class="comparison-method">
+                  <figcaption class="method-name">Input RGB</figcaption>
+                  <img src="assets/comparisons/motorcycle-cop752-754/endpoint-cop752-input.png" alt="Input RGB" width="640" height="320" loading="lazy" decoding="async">
+                </figure>
+                <figure class="comparison-method">
+                  <figcaption class="method-name">Tianmouc-UNet<span class="method-kind">Official weights</span></figcaption>
+                  <img src="assets/comparisons/motorcycle-cop752-754/endpoint-cop752-unet.png" alt="Tianmouc-UNet" width="640" height="320" loading="lazy" decoding="async">
+                </figure>
+                <figure class="comparison-method">
+                  <figcaption class="method-name">IGFNet<span class="method-kind">Official weights</span></figcaption>
+                  <img src="assets/comparisons/motorcycle-cop752-754/endpoint-cop752-igfnet.png" alt="IGFNet" width="640" height="320" loading="lazy" decoding="async">
+                </figure>
+                <figure class="comparison-method">
+                  <figcaption class="method-name">CBRDM<span class="method-kind">Official weights</span></figcaption>
+                  <img src="assets/comparisons/motorcycle-cop752-754/endpoint-cop752-cbrdm.png" alt="CBRDM" width="640" height="320" loading="lazy" decoding="async">
+                </figure>
+                <figure class="comparison-method">
+                  <figcaption class="method-name">STGDNet<span class="method-kind">Official weights</span></figcaption>
+                  <img src="assets/comparisons/motorcycle-cop752-754/endpoint-cop752-stgdnet.png" alt="STGDNet" width="640" height="320" loading="lazy" decoding="async">
+                </figure>
+                <figure class="comparison-method ours">
+                  <figcaption class="method-name">CoGenRec</figcaption>
+                  <img src="assets/comparisons/motorcycle-cop752-754/endpoint-cop752-ours.png" alt="CoGenRec" width="640" height="320" loading="lazy" decoding="async">
+                </figure>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="container section resources-section" id="resources" aria-labelledby="resources-title">
+      <div class="section-heading"><h2 id="resources-title">Resources</h2></div>
+      <div class="resources-grid">
+        <article class="resource"><svg class="icon" aria-hidden="true"><use href="#icon-paper"/></svg><h3>Paper</h3><button class="button" type="button" disabled>Paper link pending</button></article>
+        <article class="resource"><svg class="icon" aria-hidden="true"><use href="#icon-code"/></svg><h3>Code &amp; models</h3><button class="button" type="button" disabled>Repository link pending</button></article>
+      </div>
+      <div class="citation"><strong>Citation</strong><p>BibTeX will be added with the final public paper information.</p></div>
+    </section>
+  </main>
+
+  <footer><div class="container footer-inner"><span class="footer-brand">CoGenRec · Complementary Vision Reconstruction</span><span class="footer-note">Real-world captures · Official-checkpoint method comparisons</span></div></footer>
+  <noscript>Enable JavaScript for capture-speed playback, slow motion, and frame stepping. Native video controls use the encoded preview rate.</noscript>
+
+  <template id="scene-views-template">
+    <div class="scene-view-grid" hidden>
+      <figure class="scene-view"><figcaption class="view-name">RGB</figcaption><canvas data-scene-tile="0" width="640" height="320" role="img" aria-label="RGB observation"></canvas></figure>
+      <figure class="scene-view"><figcaption class="view-name">TD</figcaption><canvas data-scene-tile="1" width="640" height="320" role="img" aria-label="Temporal differences"></canvas></figure>
+      <figure class="scene-view"><figcaption class="view-name">SD</figcaption><canvas data-scene-tile="2" width="640" height="320" role="img" aria-label="Spatial differences"></canvas></figure>
+      <figure class="scene-view"><figcaption class="view-name">CoGenRec</figcaption><canvas data-scene-tile="3" width="640" height="320" role="img" aria-label="CoGenRec reconstruction"></canvas></figure>
+    </div>
+  </template>
+  <template id="player-controls-template">
+    <div class="player-controls">
+      <div class="player-transport">
+        <button class="player-button player-play" type="button" data-play aria-label="Play synchronized views" title="Play / pause"><span data-play-symbol aria-hidden="true">▶</span><span data-play-label>Play</span></button>
+        <button class="player-button" type="button" data-step="-1" aria-label="Previous synchronized frame" title="Previous frame">↤</button>
+        <button class="player-button" type="button" data-step="1" aria-label="Next synchronized frame" title="Next frame">↦</button>
+      </div>
+      <input class="player-seek" data-seek type="range" min="0" max="124" step="1" value="0" aria-label="Seek synchronized frame">
+      <label class="player-speed">
+        <input data-speed type="range" min="0" max="4" step="1" value="4" aria-label="Slow motion factor">
+        <output data-speed-readout>16× slower</output>
+      </label>
+      <button class="player-button" type="button" data-fullscreen aria-label="Fullscreen synchronized views" title="Fullscreen"><svg class="icon" aria-hidden="true"><use href="#icon-expand"/></svg></button>
+      <p class="player-status" data-player-status role="status" hidden></p>
+    </div>
+  </template>
+  <script src="scene-player.js"></script>
+  <script src="comparison-player.js"></script>
+  <script src="framework-interactions.js?v=9bdd1386541e"></script>
+</body>
+</html>
