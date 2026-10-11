@@ -142,7 +142,7 @@ def export_scene(slug, title, fps, count, generator, preview_factors, poster_fra
     for label, (x, y) in zip(("RGB", "TD", "SD", "CoGenRec"), locations):
         draw.text((x + 16, y + 8), label, font=font,
                   fill="#b7ccff" if label == "CoGenRec" else "#e7edf5")
-        draw.text((x + 624, y + 11), "~30 FPS" if label == "RGB" else f"{fps} FPS",
+        draw.text((x + 624, y + 11), "30 FPS" if label == "RGB" else f"{fps} FPS",
                   font=small, fill="#a5b4c5", anchor="ra")
     previews = {}
     for factor in preview_factors:

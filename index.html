@@ -64,7 +64,8 @@
     .sync-player video { display: block; width: 100%; aspect-ratio: 16 / 9; background: var(--stage); }
     .scene-view-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: #324151; }
     .scene-view { min-width: 0; }
-    .view-name { min-height: 26px; padding: 3px 10px; color: #e7edf5; background: var(--stage); font-size: 15px; font-weight: 600; line-height: 20px; }
+    .view-name { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 26px; padding: 3px 10px; color: #e7edf5; background: var(--stage); font-size: 15px; font-weight: 600; line-height: 20px; }
+    .view-rate { color: #a5b4c5; font-size: 12px; font-weight: 500; white-space: nowrap; }
     .scene-view:last-child .view-name { color: #b7ccff; }
     .scene-view canvas { display: block; width: 100%; height: auto; aspect-ratio: 2 / 1; background: var(--stage); }
     .player-controls { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "transport seek fullscreen" "speed speed speed"; align-items: center; gap: 3px 10px; padding: 7px 10px; border-top: 1px solid #324151; }
@@ -398,7 +399,7 @@
               </video>
               <div class="comparison-method-grid">
                 <figure class="comparison-method">
-                  <figcaption class="method-name">Input RGB</figcaption>
+                  <figcaption class="method-name">Input RGB<span class="method-kind">30 FPS</span></figcaption>
                   <img class="method-poster" src="assets/comparisons/hw-turntable-cop2-3/poster-input.jpg" alt="Input RGB comparison preview" width="640" height="320" loading="lazy">
                   <canvas data-method-tile="0" width="640" height="320" role="img" aria-label="Input RGB" hidden></canvas>
                 </figure>
@@ -428,7 +429,7 @@
           <div class="comparison-endpoint-panel" data-comparison-panel="deblur" hidden>
             <div class="comparison-method-grid comparison-endpoint-grid">
                 <figure class="comparison-method">
-                  <figcaption class="method-name">Input RGB</figcaption>
+                  <figcaption class="method-name">Input RGB<span class="method-kind">30 FPS</span></figcaption>
                   <img src="assets/comparisons/hw-turntable-cop2-3/endpoint-cop2-input.png" alt="Input RGB" width="640" height="320" loading="lazy" decoding="async">
                 </figure>
                 <figure class="comparison-method">
@@ -467,7 +468,7 @@
               </video>
               <div class="comparison-method-grid">
                 <figure class="comparison-method">
-                  <figcaption class="method-name">Input RGB</figcaption>
+                  <figcaption class="method-name">Input RGB<span class="method-kind">30 FPS</span></figcaption>
                   <img class="method-poster" src="assets/comparisons/rotating-blocks-cop40-41/poster-input.jpg" alt="Input RGB comparison preview" width="640" height="320" loading="lazy">
                   <canvas data-method-tile="0" width="640" height="320" role="img" aria-label="Input RGB" hidden></canvas>
                 </figure>
@@ -497,7 +498,7 @@
           <div class="comparison-endpoint-panel" data-comparison-panel="deblur" hidden>
             <div class="comparison-method-grid comparison-endpoint-grid">
                 <figure class="comparison-method">
-                  <figcaption class="method-name">Input RGB</figcaption>
+                  <figcaption class="method-name">Input RGB<span class="method-kind">30 FPS</span></figcaption>
                   <img src="assets/comparisons/rotating-blocks-cop40-41/endpoint-cop40-input.png" alt="Input RGB" width="640" height="320" loading="lazy" decoding="async">
                 </figure>
                 <figure class="comparison-method">
@@ -536,7 +537,7 @@
               </video>
               <div class="comparison-method-grid">
                 <figure class="comparison-method">
-                  <figcaption class="method-name">Input RGB</figcaption>
+                  <figcaption class="method-name">Input RGB<span class="method-kind">30 FPS</span></figcaption>
                   <img class="method-poster" src="assets/comparisons/hdr-cartoon-cop185/poster-input.jpg" alt="Input RGB comparison preview" width="640" height="320" loading="lazy">
                   <canvas data-method-tile="0" width="640" height="320" role="img" aria-label="Input RGB" hidden></canvas>
                 </figure>
@@ -566,7 +567,7 @@
           <div class="comparison-endpoint-panel" data-comparison-panel="deblur" hidden>
             <div class="comparison-method-grid comparison-endpoint-grid">
                 <figure class="comparison-method">
-                  <figcaption class="method-name">Input RGB</figcaption>
+                  <figcaption class="method-name">Input RGB<span class="method-kind">30 FPS</span></figcaption>
                   <img src="assets/comparisons/hdr-cartoon-cop185/endpoint-cop185-input.png" alt="Input RGB" width="640" height="320" loading="lazy" decoding="async">
                 </figure>
                 <figure class="comparison-method">
@@ -605,7 +606,7 @@
               </video>
               <div class="comparison-method-grid">
                 <figure class="comparison-method">
-                  <figcaption class="method-name">Input RGB</figcaption>
+                  <figcaption class="method-name">Input RGB<span class="method-kind">30 FPS</span></figcaption>
                   <img class="method-poster" src="assets/comparisons/hdr-bank-cop186-187/poster-input.jpg" alt="Input RGB comparison preview" width="640" height="320" loading="lazy">
                   <canvas data-method-tile="0" width="640" height="320" role="img" aria-label="Input RGB" hidden></canvas>
                 </figure>
@@ -635,7 +636,7 @@
           <div class="comparison-endpoint-panel" data-comparison-panel="deblur" hidden>
             <div class="comparison-method-grid comparison-endpoint-grid">
                 <figure class="comparison-method">
-                  <figcaption class="method-name">Input RGB</figcaption>
+                  <figcaption class="method-name">Input RGB<span class="method-kind">30 FPS</span></figcaption>
                   <img src="assets/comparisons/hdr-bank-cop186-187/endpoint-cop186-input.png" alt="Input RGB" width="640" height="320" loading="lazy" decoding="async">
                 </figure>
                 <figure class="comparison-method">
@@ -674,7 +675,7 @@
               </video>
               <div class="comparison-method-grid">
                 <figure class="comparison-method">
-                  <figcaption class="method-name">Input RGB</figcaption>
+                  <figcaption class="method-name">Input RGB<span class="method-kind">30 FPS</span></figcaption>
                   <img class="method-poster" src="assets/comparisons/motorcycle-cop752-754/poster-input.jpg" alt="Input RGB comparison preview" width="640" height="320" loading="lazy">
                   <canvas data-method-tile="0" width="640" height="320" role="img" aria-label="Input RGB" hidden></canvas>
                 </figure>
@@ -704,7 +705,7 @@
           <div class="comparison-endpoint-panel" data-comparison-panel="deblur" hidden>
             <div class="comparison-method-grid comparison-endpoint-grid">
                 <figure class="comparison-method">
-                  <figcaption class="method-name">Input RGB</figcaption>
+                  <figcaption class="method-name">Input RGB<span class="method-kind">30 FPS</span></figcaption>
                   <img src="assets/comparisons/motorcycle-cop752-754/endpoint-cop752-input.png" alt="Input RGB" width="640" height="320" loading="lazy" decoding="async">
                 </figure>
                 <figure class="comparison-method">
@@ -748,7 +749,7 @@
 
   <template id="scene-views-template">
     <div class="scene-view-grid" hidden>
-      <figure class="scene-view"><figcaption class="view-name">RGB</figcaption><canvas data-scene-tile="0" width="640" height="320" role="img" aria-label="RGB observation"></canvas></figure>
+      <figure class="scene-view"><figcaption class="view-name">RGB<span class="view-rate">30 FPS</span></figcaption><canvas data-scene-tile="0" width="640" height="320" role="img" aria-label="RGB observation, 30 FPS"></canvas></figure>
       <figure class="scene-view"><figcaption class="view-name">TD</figcaption><canvas data-scene-tile="1" width="640" height="320" role="img" aria-label="Temporal differences"></canvas></figure>
       <figure class="scene-view"><figcaption class="view-name">SD</figcaption><canvas data-scene-tile="2" width="640" height="320" role="img" aria-label="Spatial differences"></canvas></figure>
       <figure class="scene-view"><figcaption class="view-name">CoGenRec</figcaption><canvas data-scene-tile="3" width="640" height="320" role="img" aria-label="CoGenRec reconstruction"></canvas></figure>

@@ -92,6 +92,7 @@ Passing motorcycle. Train encounter refers to opposing trains meeting, and
 retains 600 km/h relative speed beside its name. The paper title is plain text.
 Baseline method labels read Official weights; Input RGB and CoGenRec have no
 Observation or Ours qualifier.
+All gallery RGB headers and comparison Input RGB headers show 30 FPS.
 Each card places its title and right-aligned tags in one compact footer row.
 Enlarge scene buttons and their separate dialogs have been removed; the player
 keeps its fullscreen button. Gallery and comparison players use one compact

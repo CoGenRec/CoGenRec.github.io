@@ -49,7 +49,7 @@ def main():
     canvas = Image.new("RGB", (WIDTH * 2, (HEIGHT + HEADER) * 2), "#142333")
     draw = ImageDraw.Draw(canvas)
     panels = [
-        ("RGB", "~30 FPS", (0, 0)),
+        ("RGB", "30 FPS", (0, 0)),
         ("TD", "757 FPS", (WIDTH, 0)),
         ("SD", "757 FPS", (0, HEIGHT + HEADER)),
         ("CoGenRec", "757 FPS", (WIDTH, HEIGHT + HEADER)),

@@ -9,6 +9,8 @@ from export_method_comparisons import PAGE, SCENES, METHODS, ENDPOINT_METHODS
 
 def method_name(label, kind):
     qualifier = '<span class="method-kind">Official weights</span>' if kind == 'Official' else ''
+    if label == 'Input RGB':
+        qualifier = '<span class="method-kind">30 FPS</span>'
     return f'<figcaption class="method-name">{escape(label)}{qualifier}</figcaption>'
 
 
