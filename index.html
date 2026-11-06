@@ -51,9 +51,13 @@
     .eyebrow { color: var(--blue); text-transform: uppercase; font-size: 12px; font-weight: 650; letter-spacing: 1.7px; }
     .hero { padding-top: 66px; text-align: center; }
     .hero h1 { max-width: 1050px; margin: 14px auto 0; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.25; font-weight: 600; letter-spacing: -.8px; }
-    .affiliations { max-width: 960px; margin: 24px auto 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 24px; font-size: 17px; color: #526274; }
-    .affiliations span { white-space: nowrap; }
-    .hero-summary { max-width: 760px; margin: 24px auto 0; color: var(--muted); font-size: 18px; line-height: 1.7; }
+    .authors { max-width: 1050px; margin: 26px auto 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 22px; font-size: 20px; line-height: 1.6; }
+    .authors > span { white-space: nowrap; }
+    .authors sup, .affiliations sup { margin-left: 2px; font-size: .7em; }
+    .affiliations { max-width: 1050px; margin: 18px auto 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 24px; font-size: 16px; color: #526274; }
+    .affiliations span { max-width: 100%; }
+    .author-note { margin-top: 10px; color: var(--muted); font-size: 14px; }
+    .overview-summary { margin-top: 12px; color: var(--muted); font-size: 18px; line-height: 1.7; }
     .actions { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px; margin-top: 28px; }
     .button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 46px; padding: 10px 20px; border-radius: 9px; border: 1px solid var(--line); background: var(--surface); font-size: 15px; font-weight: 550; transition: background .15s, border-color .15s; }
     .button:hover:not(:disabled) { border-color: #b9c7dd; background: #f3f6fb; }
@@ -143,13 +147,13 @@
     .resource > .icon { width: 26px; height: 26px; color: #4d6689; }
     .resource h3 { font-size: 22px; }
     .resource .button { grid-column: 2; justify-self: start; min-height: 42px; padding: 8px 14px; font-size: 14px; }
-    .citation { margin-top: 25px; padding: 20px 24px; border: 1px solid var(--line); border-radius: 10px; background: #f4f6f7; display: flex; gap: 24px; align-items: baseline; }
-    .citation strong { font-size: 15px; font-weight: 550; }
-    .citation p { color: var(--muted); font-size: 14px; }
+    .citation { margin-top: 25px; padding: 20px 24px; border: 1px solid var(--line); border-radius: 10px; background: #f4f6f7; display: flex; flex-direction: column; gap: 14px; }
+    .citation strong { font-size: 18px; font-weight: 550; }
+    .citation pre { margin: 0; min-width: 0; white-space: pre-wrap; overflow-wrap: anywhere; color: var(--muted); font: 14px/1.7 ui-monospace, SFMono-Regular, Consolas, monospace; }
+    .citation code { font: inherit; }
     footer { border-top: 1px solid var(--line); padding: 24px 0; }
     .footer-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
     .footer-brand { color: #536477; font-size: 14px; font-weight: 550; }
-    .footer-note { color: var(--muted); font-size: 13px; }
     noscript { display: block; text-align: center; padding: 14px; font-size: 15px; color: var(--muted); }
     @media (min-width: 1600px) { .hero { padding-top: 78px; } }
     @media (max-width: 1100px) {
@@ -171,8 +175,9 @@
       .nav-extra { display: none; }
       .hero { padding-top: 43px; }
       .hero .eyebrow { font-size: 11px; letter-spacing: 1.2px; }
-      .affiliations { margin-top: 22px; gap: 6px 18px; font-size: 15px; }
-      .hero-summary { font-size: 17px; max-width: 530px; }
+      .authors { margin-top: 22px; gap: 6px 18px; font-size: 18px; }
+      .affiliations { margin-top: 16px; gap: 8px 18px; font-size: 14px; }
+      .overview-summary { font-size: 17px; }
       .section { padding-top: 65px; }
       .overview-layout { grid-template-columns: 1fr; gap: 30px; }
       .contribution-list { grid-template-columns: 1fr; gap: 18px; }
@@ -246,20 +251,38 @@
     <section class="container hero" aria-labelledby="project-title">
       <p class="eyebrow">Complementary vision · Generative reconstruction</p>
       <h1 id="project-title">CoGenRec: A Unified Generative Framework for Complementary Vision Reconstruction</h1>
-      <div class="affiliations" aria-label="Affiliations">
-        <span>Tsinghua University</span><span>Primevision</span>
+      <div class="authors" aria-label="Authors">
+        <span>Yapeng Meng<sup>1</sup></span>
+        <span>Yuguo Chen<sup>1</sup></span>
+        <span>Xiangru Chen<sup>1</sup></span>
+        <span>Shaojun Xu<sup>1</sup></span>
+        <span>Xuezhen Wang<sup>3</sup></span>
+        <span>Lijian Wang<sup>1</sup></span>
+        <span>Zheyu Yang<sup>4</sup></span>
+        <span>Yihan Lin<sup>2,*</sup></span>
+        <span>Luping Shi<sup>1</sup></span>
+        <span>Rong Zhao<sup>1,*</sup></span>
       </div>
-      <p class="hero-summary">Reconstructing sharp, high-frame-rate HDR video<br>from complementary RGB and spatio-temporal measurements.</p>
+      <div class="affiliations" aria-label="Affiliations">
+        <span><sup>1</sup> Department of Precision Instrument, Tsinghua University</span>
+        <span><sup>2</sup> Pen-Tung Sah Institute of Micro-Nano Science and Technology, Xiamen University</span>
+        <span><sup>3</sup> The Hong Kong University of Science and Technology</span>
+        <span><sup>4</sup> Primevision Technology</span>
+      </div>
+      <p class="author-note">* Corresponding authors</p>
       <div class="actions">
         <a class="button primary" href="#results">Explore results<svg class="icon" aria-hidden="true"><use href="#icon-arrow"/></svg></a>
-        <button class="button" type="button" disabled title="The paper link will be added to the final page."><svg class="icon" aria-hidden="true"><use href="#icon-paper"/></svg>Paper</button>
+        <a class="button" href="https://arxiv.org/abs/2611.07665" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#icon-paper"/></svg>Paper</a>
         <button class="button" type="button" disabled title="The code link will be added to the final page."><svg class="icon" aria-hidden="true"><use href="#icon-code"/></svg>Code</button>
       </div>
     </section>
 
     <section class="container section" id="overview" aria-labelledby="overview-title">
       <div class="overview-layout">
-        <h2 id="overview-title">Overview</h2>
+        <div>
+          <h2 id="overview-title">Overview</h2>
+          <p class="overview-summary">Reconstructing sharp, high-frame-rate HDR video from complementary RGB and spatio-temporal measurements.</p>
+        </div>
         <figure class="method-diagram" aria-label="CoGenRec framework: dual-pathway CVS measurements, generative reconstruction, exposure-aware endpoint encoding and bidirectional temporal propagation.">
           <picture class="framework-wide">
             <source media="(prefers-reduced-motion: reduce)" srcset="assets/framework/cogenrec-framework-static.svg?v=660b6ce4bebc">
@@ -737,14 +760,22 @@
     <section class="container section resources-section" id="resources" aria-labelledby="resources-title">
       <div class="section-heading"><h2 id="resources-title">Resources</h2></div>
       <div class="resources-grid">
-        <article class="resource"><svg class="icon" aria-hidden="true"><use href="#icon-paper"/></svg><h3>Paper</h3><button class="button" type="button" disabled>Paper link pending</button></article>
+        <article class="resource"><svg class="icon" aria-hidden="true"><use href="#icon-paper"/></svg><h3>Paper</h3><a class="button" href="https://arxiv.org/abs/2611.07665" target="_blank" rel="noopener noreferrer">Read on arXiv</a></article>
         <article class="resource"><svg class="icon" aria-hidden="true"><use href="#icon-code"/></svg><h3>Code &amp; models</h3><button class="button" type="button" disabled>Repository link pending</button></article>
       </div>
-      <div class="citation"><strong>Citation</strong><p>BibTeX will be added with the final public paper information.</p></div>
+      <div class="citation"><strong>Citation</strong><pre><code>@misc{meng2026cogenrecunifiedgenerativeframework,
+      title={CoGenRec: A Unified Generative Framework for Complementary Vision Reconstruction},
+      author={Yapeng Meng and Yuguo Chen and Xiangru Chen and Shaojun Xu and Xuezhen Wang and Lijian Wang and Zheyu Yang and Yihan Lin and Luping Shi and Rong Zhao},
+      year={2026},
+      eprint={2611.07665},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2611.07665},
+}</code></pre></div>
     </section>
   </main>
 
-  <footer><div class="container footer-inner"><span class="footer-brand">CoGenRec · Complementary Vision Reconstruction</span><span class="footer-note">Real-world captures · Official-checkpoint method comparisons</span></div></footer>
+  <footer><div class="container footer-inner"><span class="footer-brand">CoGenRec · Complementary Vision Reconstruction</span></div></footer>
   <noscript>Enable JavaScript for capture-speed playback, slow motion, and frame stepping. Native video controls use the encoded preview rate.</noscript>
 
   <template id="scene-views-template">
